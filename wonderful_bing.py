@@ -1,46 +1,53 @@
-#!/usr/bin/env python
-# -*- coding: UTF-8 -*-
+#! /usr/bin/env python
 
 import re
-import os
 import time
+import os
 
 import requests
 
 
-def download_and_set(imgUrl):  
-    filename = imgUrl.split('/')[-1] 
-    local_filename = change_name(filename) + ".jpg"
-    if os.path.isfile("/home/lord63/pictures/bing/"+local_filename):
-    	return  # if the picture had been downloaded, stop doing the following things
-    r = requests.get(imgUrl, stream=True)  # to get the raw content 
-    with open("/home/lord63/picture/bing/"+local_filename, 'wb') as f:  
-        for chunk in r.iter_content(chunk_size=1024):        
-            f.write(chunk)  
-    print "Download Image File=", local_filename     
-    set_wallpaper("/home/lord63/picture/bing/"+local_filename)
+def get_picture_url(page_url):
+	r = requests.get(page_url)
+	match = re.search("(?<=')http://s.cn.bing.net/az/hprichbg/rb/.+?(?=')", r.text)
+	picture_url = match.group()
+	return picture_url
 
-# make the picture name look nicer
-def change_name(filename):
-	p = re.compile('([^_])*')
-	m = p.search(filename)
-	return m.group()
+def download_and_set(picture_url):
+	picture_name = get_picture_name(picture_url)
+	picture_path = "/home/lord63/pictures/bing/" + picture_name
+	if os.path.isfile(picture_path):
+		print "You have downloaded the picture before."
+		print "Have a look at it --> " + picture_path
+		return
+	r = requests.get(picture_url, stream=True)  # To get the raw content
+	with open(picture_path, "wb") as f:
+		for chunk in r.iter_content(1024):
+			f.write(chunk)
+	print "Successfully download the picture to \n    " + picture_path
+	set_wallpaper(picture_path)
+	print "Successfully set the picture as the wallpaper. :)"
 
-def set_wallpaper(picPath):
-    os.system('gsettings set org.gnome.desktop.background picture-uri file://' + picPath)
+def get_picture_name(picture_url):
+	match = re.search("(?<=http://s.cn.bing.net/az/hprichbg/rb/).+?(?=_)", picture_url)
+	picture_name = match.group() + '.jpg'
+	return picture_name
 
-#------------------------------------------------------------#
+def set_wallpaper(picture_path):
+	os.system('gsettings set org.gnome.desktop.background picture-uri file://' + picture_path)
+
+#--------------------------------------------------------------------------------------------#
+
+# sleep for five seconds, otherwise the newly setted wallpaper will be setted back by the  
+# system when your system boots up if you have added this script to autostart.
 time.sleep(5)
 
-r = requests.get('http://cn.bing.com')
+picture_url = get_picture_url("http://cn.bing.com")
 
-# using regular expression to get the picture url
-p = re.compile('http://s.cn.bing.net/az/hprichbg/rb/([^\']+)')
-m = p.search(r.content)
-Url = m.group()
-
-download_and_set(Url)
+download_and_set(picture_url)
 
 
 
-   
+
+
+
