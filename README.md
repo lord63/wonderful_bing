@@ -1,7 +1,11 @@
 #**Wonderful_Bing**
------------------
+
 
 #### My first python programme :)
+
+### **Requirements**
+* Python 2.7
+* Requests
 
 ### **How to use**
 1.  Edit the `picture_path` in line 20, choose a folder that you want to 
