@@ -18,7 +18,7 @@ def get_picture_url(page_url):
 def download_and_set(picture_url):
     picture_name = get_picture_name(picture_url)
     picture_path = "/home/lord63/pictures/bing/" + picture_name
-    if os.path.isfile(picture_path):
+    if os.path.exists(picture_path):
         print "You have downloaded the picture before."
         print "Have a look at it --> " + picture_path
         return
