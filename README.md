@@ -11,15 +11,15 @@
 
 first time you run it:
 
-![](./src/01.png)
+![](./img/01.png)
 
 if the picture has been downloaded before:
 
-![](./src/02.png)
+![](./img/02.png)
 
 if your pc doesn't connect to the network, it will try again after 5 mins.
 
-![](./src/03.png)
+![](./img/03.png)
 
 ### **How to use**
 1.  Edit the `picture_path` in line 20, choose a folder that you want to 
