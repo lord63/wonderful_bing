@@ -4,9 +4,6 @@ import re
 import time
 import os
 import gtk
-import gobject
-import pygtk
-pygtk.require("2.0")
 import pynotify
 pynotify.init('Wonderful_Bing')
 
@@ -14,48 +11,16 @@ import requests
 from lxml import html
 
 
-class Wonderful_Bing():
-    def __init__(self):
-        self.tooltip = "Wonderful_Bing\nWait..."
-        self.total = 0
-        self.init_icon()
-        self.notifier = pynotify.Notification("Wonderful_Bing")
-        self.update()
-        gobject.timeout_add(3, self.on_quit)
-
-    def right_click(self, icon, button, time):
-        self.menu.popup(None, None, None, button, time)
-        return False
-
-    def init_icon(self):
-        self.icon = gtk.status_icon_new_from_stock(gtk.STOCK_FIND)
-        self.icon.set_title("Wonderful_Bing")
-        self.icon.set_tooltip(self.tooltip)
-        self.icon.set_visible(True)
-        # Add a menu for the icon
-        self.menu = gtk.Menu()
-        quit = gtk.MenuItem("Quit")
-        quit.connect("activate", gtk.main_quit)
-        self.menu.append(quit)
-        self.menu.show_all()
-        self.icon.connect("popup-menu", self.right_click)
-
-    def update(self):
-        def get_info(self):
-            r = requests.get('http://cn.bing.com')
-            tree = html.fromstring(r.text)
-            info1 = tree.xpath('//div[@id="hp_pgm0"]/h3/text()')[0]
-            info2 = tree.xpath('//div[@id="hp_pgm0"]/a/text()')[0]
-            return info1+'\n'+info2
-        info = get_info(self) 
-        self.tooltip = info
-        self.icon.set_tooltip(self.tooltip)
-        self.notifier.update("Wonderful_Bing", self.tooltip, "dialog-warning")
-        self.notifier.show()
-        return True
-
-    def on_quit(self):
-        gtk.main_quit()
+def show_notify():
+    r = requests.get('http://cn.bing.com')
+    tree = html.fromstring(r.text)
+    title = tree.xpath('//div[@id="hp_pgm0"]/h3/text()')[0]
+    story_name = tree.xpath('//div[@id="hp_pgm0"]/a/text()')[0]
+    
+    n = pynotify.Notification(title, story_name)
+    n.set_icon_from_pixbuf(
+        gtk.Label().render_icon(gtk.STOCK_YES, gtk.ICON_SIZE_LARGE_TOOLBAR))
+    n.show()
 
 
 def get_picture_url(page_url):
@@ -81,8 +46,8 @@ def download_and_set(picture_url):
     print "Successfully download the picture to --> " + picture_path
     set_wallpaper(picture_path)
     print "Successfully set the picture as the wallpaper. :)"
-    nm = Wonderful_Bing()
-    gtk.main()
+
+    show_notify()
 
 
 def get_picture_name(picture_url):
@@ -97,22 +62,20 @@ def set_wallpaper(picture_path):
               picture_path)
 
 
-def main():
-    picture_url = get_picture_url("http://cn.bing.com")
-    download_and_set(picture_url)
-
-
 # ----------------------------------------------------------------------#
 
 # sleep for five seconds, otherwise the newly setted wallpaper will be
 # setted back by the system when your system boots up if you have added
 # this script to autostart.
 time.sleep(5)
+
 print "Program start"
 try:
-    main()
+    picture_url = get_picture_url("http://cn.bing.com")
+    download_and_set(picture_url)
 except requests.exceptions.ConnectionError:
     print "ConnectionError,check your network please."
     time.sleep(300)
-    main()
+    picture_url = get_picture_url("http://cn.bing.com")
+    download_and_set(picture_url)
 print "Program end"
