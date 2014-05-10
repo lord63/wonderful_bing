@@ -3,8 +3,21 @@
 import re
 import time
 import os
+import sys
+import pynotify
+pynotify.init('Wonderful_Bing')
 
 import requests
+from lxml import html
+
+
+def show_notify():
+    r = requests.get('http://cn.bing.com')
+    tree = html.fromstring(r.text)
+    title = tree.xpath('//div[@id="hp_pgm0"]/h3/text()')[0]
+    story_name = tree.xpath('//div[@id="hp_pgm0"]/a/text()')[0]
+    n = pynotify.Notification(title, story_name, sys.path[0]+'/img/icon.png')
+    n.show()
 
 
 def get_picture_url(page_url):
@@ -31,6 +44,8 @@ def download_and_set(picture_url):
     set_wallpaper(picture_path)
     print "Successfully set the picture as the wallpaper. :)"
 
+    show_notify()
+
 
 def get_picture_name(picture_url):
     match = re.search(
@@ -43,6 +58,7 @@ def set_wallpaper(picture_path):
     os.system('gsettings set org.gnome.desktop.background picture-uri file:' +
               picture_path)
 
+
 # ----------------------------------------------------------------------#
 
 # sleep for five seconds, otherwise the newly setted wallpaper will be
@@ -51,7 +67,6 @@ def set_wallpaper(picture_path):
 time.sleep(5)
 
 print "Program start"
-
 try:
     picture_url = get_picture_url("http://cn.bing.com")
     download_and_set(picture_url)
@@ -60,5 +75,4 @@ except requests.exceptions.ConnectionError:
     time.sleep(300)
     picture_url = get_picture_url("http://cn.bing.com")
     download_and_set(picture_url)
-
 print "Program end"
