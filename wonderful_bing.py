@@ -3,7 +3,7 @@
 import re
 import time
 import os
-import gtk
+import sys
 import pynotify
 pynotify.init('Wonderful_Bing')
 
@@ -16,10 +16,7 @@ def show_notify():
     tree = html.fromstring(r.text)
     title = tree.xpath('//div[@id="hp_pgm0"]/h3/text()')[0]
     story_name = tree.xpath('//div[@id="hp_pgm0"]/a/text()')[0]
-    
-    n = pynotify.Notification(title, story_name)
-    n.set_icon_from_pixbuf(
-        gtk.Label().render_icon(gtk.STOCK_YES, gtk.ICON_SIZE_LARGE_TOOLBAR))
+    n = pynotify.Notification(title, story_name, sys.path[0]+'/img/icon.png')
     n.show()
 
 
