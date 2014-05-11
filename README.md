@@ -6,6 +6,7 @@
 ### **Requirements**
 * Python 2.7
 * Requests
+* Lxml
 
 ### **Snapshots**
 
@@ -20,6 +21,10 @@ if the picture has been downloaded before:
 if your pc doesn't connect to the network, it will try again after 5 mins.
 
 ![](./img/03.png)
+
+and the notify should looks like this:
+
+![](./img/notify.png)
 
 ### **How to use**
 1.  Edit the `picture_path` in line 20, choose a folder that you want to 
