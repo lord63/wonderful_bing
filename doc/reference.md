@@ -33,6 +33,10 @@ commandlines which can set a picture as wallpaper:
     2.  hsetroot  -extend  picture_path
     3.  gsettings set org.gnome.desktop.background picture-uri file://picture_path
 
+### About the icon
+
+I get it from [here][11]
+
 
 [1]: https://docs.python.org/2/library/re.html
 [2]: http://docs.python-requests.org/en/latest/user/quickstart/#raw-response-content
@@ -42,5 +46,6 @@ commandlines which can set a picture as wallpaper:
 [6]: http://dcy.is-programmer.com/posts/8844.html
 [7]: http://www.galago-project.org/specs/notification/0.9/index.html
 [8]: http://docs.python-guide.org/en/latest/scenarios/scrape/#lxml-and-requests
-[9]: [http://www.w3schools.com/xpath/default.asp
+[9]: http://www.w3schools.com/xpath/default.asp
 [10]: http://deerchao.net/tutorials/regex/regex.htm
+[11]: http://thenounproject.com/term/happy/346/
