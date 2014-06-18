@@ -27,8 +27,8 @@ and the notify should looks like this:
 ![](./img/notify.png)
 
 ### **How to use**
-1.  Edit the `picture_path` in line 20, choose a folder that you want to 
-    save the picture in, end with a '/'.
+1.  Edit the `picture_path` in the function `download_and_set`, choose a folder 
+    that you want to save the picture in, end with a '/'.
 2.  Add it to autostart, then every time you boot up your pc, this script will 
     automatically download the picture from Bing and set it as the wallpaper ;)
 
