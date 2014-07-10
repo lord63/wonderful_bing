@@ -1,4 +1,5 @@
 #!/usr/bin/env python
+# -*- coding: utf-8 -*-
 
 import re
 import time
@@ -8,14 +9,12 @@ import pynotify
 pynotify.init('Wonderful_Bing')
 
 import requests
-from lxml import html
 
 
 def show_notify():
     r = requests.get('http://cn.bing.com')
-    tree = html.fromstring(r.text)
-    title = tree.xpath('//div[@id="hp_pgm0"]/h3/text()')[0]
-    story_name = tree.xpath('//div[@id="hp_pgm0"]/a/text()')[0]
+    title = u'今日图片故事'
+    story_name = re.search('(?<=id="sh_cp" title=").*(?=\(\\xa9)', r.text).group()
     n = pynotify.Notification(title, story_name, sys.path[0]+'/img/icon.png')
     n.show()
 
