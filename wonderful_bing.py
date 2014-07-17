@@ -5,6 +5,7 @@ import re
 import time
 import os
 import sys
+import argparse
 import pynotify
 pynotify.init('Wonderful_Bing')
 
@@ -29,12 +30,16 @@ def get_picture_url(page_url):
 
 def download_and_set(picture_url):
     picture_name = get_picture_name(picture_url)
-    picture_path = "/home/lord63/pictures/bing/" + picture_name
+    picture_path = config['local_directory'] + picture_name
     if os.path.exists(picture_path):
         print "You have downloaded the picture before."
         print "Have a look at it --> " + picture_path
         return
 
+    # sleep for two seconds, otherwise the newly setted wallpaper will be
+    # setted back by the system when your system boots up if you have added
+    # this script to autostart.
+    time.sleep(2)
     r = requests.get(picture_url, stream=True)  # To get the raw content
     with open(picture_path, "wb") as f:
         for chunk in r.iter_content(1024):
@@ -60,18 +65,17 @@ def set_wallpaper(picture_path):
 
 # ----------------------------------------------------------------------#
 
-# sleep for five seconds, otherwise the newly setted wallpaper will be
-# setted back by the system when your system boots up if you have added
-# this script to autostart.
-time.sleep(5)
+parser = argparse.ArgumentParser(description="Wonderful_bing's configuration")
+parser.add_argument('-d', dest='local_directory',
+                    help="set the directory to save Bing's imgs")
+config=vars(parser.parse_args())
 
-print "Program start"
 try:
     picture_url = get_picture_url("http://cn.bing.com")
     download_and_set(picture_url)
 except requests.exceptions.ConnectionError:
     print "ConnectionError,check your network please."
+    print "Will try again after 5 minutes."
     time.sleep(300)
     picture_url = get_picture_url("http://cn.bing.com")
     download_and_set(picture_url)
-print "Program end"
