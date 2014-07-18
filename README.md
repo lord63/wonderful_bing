@@ -1,42 +1,67 @@
-#**Wonderful_Bing**
+# Wonderful_Bing
+
+[![Latest Version][1]][2]
+[![The MIT License][3]][4]
+![Platform][5]
 
 
-#### My first python programme :)
+## Requirements
 
-### **Requirements**
+
+* Linux platform
 * Python 2.7
-* Requests
-* Lxml
+* Requests lib
 
-### **Snapshots**
 
-first time you run it:
+## Usage
 
-![](./img/01.png)
+* You need to set a directory to save the downloaded pictures, end with '/'.
+
+        $ wonderful_bing -d /path/to/save/pictures/
+
+* Use `cron` or add it to `startup applications` so that the script will run 
+automatically everyday.
+
+
+## Snapshots
+
+the first time you run it:
+
+    $ python wonderful_bing.py -d /home/lord63/pictures/bing/
+    Successfully download the picture to --> /home/lord63/pictures/bing/CascadePools.jpg
+    Successfully set the picture as the wallpaper. :)
+
+if you don't set the directory:
+
+    $ python wonderful_bing.py -d /home/lord63/pictures/bing/
+    Set the directory to save Bing's imgs first.
+    For more information, use --help.
+
 
 if the picture has been downloaded before:
 
-![](./img/02.png)
+    $ python wonderful_bing.py -d /home/lord63/pictures/bing/
+    You have downloaded the picture before.
+    Have a look at it --> /home/lord63/pictures/bing/CascadePools.jpg
 
 if your pc doesn't connect to the network, it will try again after 5 mins.
 
-![](./img/03.png)
+    $ python wonderful_bing.py -d /home/lord63/pictures/bing/
+    ConnectionError,check your network please.
+    Will try again after 5 minutes.
 
 and the notify should looks like this:
 
 ![](./img/notify.png)
 
-### **How to use**
-1.  Edit the `picture_path` in the function `download_and_set`, choose a folder 
-    that you want to save the picture in, end with a '/'.
-2.  Add it to autostart, then every time you boot up your pc, this script will 
-    automatically download the picture from Bing and set it as the wallpaper ;)
 
-### **Note**
-*  Only works under linux, maybe there will be a windows version someday or you 
-   can edit it by youself. It works fine on my Linux Mint 16 Cinnamon.
+## License
 
-### **License**
 MIT License
 
 
+[1]: http://img.shields.io/pypi/v/wonderful_bing.svg
+[2]: https://pypi.python.org/pypi/wonderful_bing
+[3]: http://img.shields.io/badge/license-MIT-yellow.svg
+[4]: https://github.com/lord63/wonderful_bing/blob/master/LICENSE
+[5]: http://img.shields.io/badge/Platform-Linux-orange.svg
