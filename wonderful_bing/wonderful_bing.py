@@ -77,9 +77,11 @@ def main():
         print "Set the directory to save Bing's imgs first."
         print "For more information, use --help."
 
+
+parser = argparse.ArgumentParser(description="Wonderful_bing's configuration")
+parser.add_argument('-d', dest='local_directory',
+                    help="set the directory to save Bing's imgs, end with '/'")
+config=vars(parser.parse_args())
+
 if __name__ == '__main__':
-    parser = argparse.ArgumentParser(description="Wonderful_bing's configuration")
-    parser.add_argument('-d', dest='local_directory',
-                        help="set the directory to save Bing's imgs, end with '/'")
-    config=vars(parser.parse_args())
     main()

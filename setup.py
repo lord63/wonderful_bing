@@ -1,12 +1,12 @@
-from setuptools import setuptools
+from setuptools import setup
 from codecs import open
 from os import path
+
 
 here = path.abspath(path.dirname(__file__))
 
 with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
-
 setup(
     name='wonderful_bing',
     version='0.4.0',
@@ -18,19 +18,20 @@ setup(
     license='MIT',
     classifiers=[
         'Development Status :: 4 - Beta',
-        'topic :: Bing :: Wallpaper',
+        'Operating System :: POSIX',
+        'Operating System :: POSIX :: Linux',
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
-        ],
+    ],
     keywords='bing wallpaper',
     packages=['wonderful_bing'],
-    install_requires=['requsts'],
+    install_requires=['requests'],
     package_data={
-        'wonderful_bing': ['README.rst', 'LICENSE'],
+        'wonderful_bing': ['README.rst', 'LICENSE', 'img/icon.png', 'img/notify.png'],
     },
     entry_points={
         'console_scripts': [
-            'wonderful_bing=wonderful_bing:main']
+            'wonderful_bing=wonderful_bing.wonderful_bing:main']
     }
     )
