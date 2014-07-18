@@ -32,6 +32,11 @@ commandlines which can set a picture as wallpaper:
     1.  feh --bg-fill picture_path
     2.  hsetroot  -extend  picture_path
     3.  gsettings set org.gnome.desktop.background picture-uri file://picture_path
+    
+### About the arguments
+
+[PyMOTW][12]
+[The standard library documentation for this module][13]
 
 ### About the icon
 
@@ -49,3 +54,5 @@ I get it from [here][11]
 [9]: http://www.w3schools.com/xpath/default.asp
 [10]: http://deerchao.net/tutorials/regex/regex.htm
 [11]: http://thenounproject.com/term/happy/346/
+[12]: http://pymotw.com/2/argparse/
+[13]: https://docs.python.org/2/howto/argparse.html

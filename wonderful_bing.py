@@ -63,19 +63,23 @@ def set_wallpaper(picture_path):
               picture_path)
 
 
-# ----------------------------------------------------------------------#
+def main():
+    try:
+        picture_url = get_picture_url("http://cn.bing.com")
+        download_and_set(picture_url)
+    except requests.exceptions.ConnectionError:
+        print "ConnectionError,check your network please."
+        print "Will try again after 5 minutes."
+        time.sleep(300)
+        picture_url = get_picture_url("http://cn.bing.com")
+        download_and_set(picture_url)
+    except TypeError:
+        print "Set the directory to save Bing's imgs first."
+        print "For more information, use --help."
 
-parser = argparse.ArgumentParser(description="Wonderful_bing's configuration")
-parser.add_argument('-d', dest='local_directory',
-                    help="set the directory to save Bing's imgs")
-config=vars(parser.parse_args())
-
-try:
-    picture_url = get_picture_url("http://cn.bing.com")
-    download_and_set(picture_url)
-except requests.exceptions.ConnectionError:
-    print "ConnectionError,check your network please."
-    print "Will try again after 5 minutes."
-    time.sleep(300)
-    picture_url = get_picture_url("http://cn.bing.com")
-    download_and_set(picture_url)
+if __name__ == '__main__':
+    parser = argparse.ArgumentParser(description="Wonderful_bing's configuration")
+    parser.add_argument('-d', dest='local_directory',
+                        help="set the directory to save Bing's imgs, end with '/'")
+    config=vars(parser.parse_args())
+    main()
