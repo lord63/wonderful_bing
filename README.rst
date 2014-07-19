@@ -59,10 +59,6 @@ mins.
     ConnectionError,check your network please.
     Will try again after 5 minutes.
 
-and the notify should looks like this:
-
-.. figure:: ./img/notify.png
-   :alt: 
 
 License
 -------

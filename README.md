@@ -52,7 +52,7 @@ if your pc doesn't connect to the network, it will try again after 5 mins.
 
 and the notify should looks like this:
 
-![](./img/notify.png)
+![](./wonderful_bing/img/notify.png)
 
 
 ## License
