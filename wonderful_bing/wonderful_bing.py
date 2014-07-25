@@ -4,7 +4,6 @@
 import re
 import time
 import os
-import sys
 import argparse
 import pynotify
 pynotify.init('Wonderful_Bing')
@@ -16,7 +15,7 @@ def show_notify():
     r = requests.get('http://cn.bing.com')
     title = u'今日图片故事'
     story_name = re.search('(?<=id="sh_cp" title=").*(?=\(\\xa9)', r.text).group()
-    n = pynotify.Notification(title, story_name, sys.path[0]+'/img/icon.png')
+    n = pynotify.Notification(title, story_name, os.getcwd()+'/img/icon.png')
     n.show()
 
 
