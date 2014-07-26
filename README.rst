@@ -20,9 +20,6 @@ Usage
 
        $ wonderful_bing -d /path/to/save/pictures/
 
--  Use ``cron`` or add it to ``startup applications`` so that the script
-   will run automatically everyday.
-
 Snapshots
 ---------
 
