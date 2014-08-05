@@ -14,8 +14,10 @@ import requests
 def show_notify():
     r = requests.get('http://cn.bing.com')
     title = u'今日图片故事'
-    story_name = re.search('(?<=id="sh_cp" title=").*(?=\(\\xa9)', r.text).group()
-    n = pynotify.Notification(title, story_name, os.getcwd()+'/img/icon.png')
+    story_name = re.search(
+        '(?<=id="sh_cp" title=").*(?=\(\\xa9)', r.text).group()
+    n = pynotify.Notification(title, story_name,
+                              os.path.dirname(__file__)+'/img/icon.png')
     n.show()
 
 
@@ -78,9 +80,9 @@ def main():
 
 
 parser = argparse.ArgumentParser(description="Wonderful_bing's configuration")
-parser.add_argument('-d', dest='local_directory',
+parser.add_argument('-d', dest='directory',
                     help="set the directory to save Bing's imgs, end with '/'")
-config=vars(parser.parse_args())
+config = vars(parser.parse_args())
 
 if __name__ == '__main__':
     main()
