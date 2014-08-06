@@ -11,11 +11,15 @@ pynotify.init('Wonderful_Bing')
 import requests
 
 
-def show_notify():
-    r = requests.get('http://cn.bing.com')
-    title = u'今日图片故事'
+def show_notify(is_ZH):
+    r = requests.get('http://www.bing.com')
+    if is_ZH:
+        title = u'今日图片故事'
+    else:
+        title = "Today's Picture Story"
     story_name = re.search(
-        '(?<=id="sh_cp" title=").*(?=\(\\xa9)', r.text).group()
+        '((?<=id="sh_cp" title=")|(?<=class="sc_light" title=")).*(?=\(\\xa9)',
+         r.text).group()
     n = pynotify.Notification(title, story_name,
                               os.path.dirname(__file__)+'/img/icon.png')
     n.show()
@@ -24,14 +28,20 @@ def show_notify():
 def get_picture_url(page_url):
     r = requests.get(page_url)
     match = re.search(
-        "(?<=')http://s.cn.bing.net/az/hprichbg/rb/.+?(?=')", r.text)
+        "/az/hprichbg/rb/.+?(?=')", r.text)
     picture_url = match.group()
-    return picture_url
+    if len(r.history):
+        ZH = 1
+        picture_url = 'http://s.cn.bing.net' + picture_url
+    else:
+        ZH = 0
+        picture_url = 'http://www.bing.com' + picture_url
+    return picture_url, ZH
 
 
-def download_and_set(picture_url):
+def download_and_set(picture_url, is_ZH):
     picture_name = get_picture_name(picture_url)
-    picture_path = config['local_directory'] + picture_name
+    picture_path = config['directory'] + picture_name
     if os.path.exists(picture_path):
         print "You have downloaded the picture before."
         print "Have a look at it --> " + picture_path
@@ -49,12 +59,12 @@ def download_and_set(picture_url):
     set_wallpaper(picture_path)
     print "Successfully set the picture as the wallpaper. :)"
 
-    show_notify()
+    show_notify(is_ZH)
 
 
 def get_picture_name(picture_url):
     match = re.search(
-        "(?<=http://s.cn.bing.net/az/hprichbg/rb/).+?(?=_)", picture_url)
+        "(?<=/az/hprichbg/rb/).+?(?=_)", picture_url)
     picture_name = match.group() + '.jpg'
     return picture_name
 
@@ -66,8 +76,8 @@ def set_wallpaper(picture_path):
 
 def main():
     try:
-        picture_url = get_picture_url("http://cn.bing.com")
-        download_and_set(picture_url)
+        picture_url, ZH= get_picture_url("http://www.bing.com")
+        download_and_set(picture_url, ZH)
     except requests.exceptions.ConnectionError:
         print "ConnectionError,check your network please."
         print "Will try again after 5 minutes."
