@@ -19,9 +19,10 @@ def show_notify(is_ZH):
         title = "Today's Picture Story"
     story_name = re.search(
         '((?<=id="sh_cp" title=")|(?<=class="sc_light" title=")).*(?=\(\\xa9)',
-         r.text).group()
-    n = pynotify.Notification(title, story_name,
-                              os.path.dirname(__file__)+'/img/icon.png')
+        r.text).group()
+    n = pynotify.Notification(
+        title, story_name,
+        os.path.dirname(os.path.realpath(__file__))+'/img/icon.png')
     n.show()
 
 
@@ -76,7 +77,7 @@ def set_wallpaper(picture_path):
 
 def main():
     try:
-        picture_url, ZH= get_picture_url("http://www.bing.com")
+        picture_url, ZH = get_picture_url("http://www.bing.com")
         download_and_set(picture_url, ZH)
     except requests.exceptions.ConnectionError:
         print "ConnectionError,check your network please."

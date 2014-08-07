@@ -9,7 +9,7 @@ with open(path.join(here, 'README.rst'), encoding='utf-8') as f:
     long_description = f.read()
 setup(
     name='wonderful_bing',
-    version='0.4.0',
+    version='0.4.1',
     description="A script download Bing's img and set as wallpaper",
     long_description=long_description,
     url='https://github.com/lord63/wonderful_bing',
