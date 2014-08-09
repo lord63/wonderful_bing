@@ -83,8 +83,8 @@ def main():
         print "ConnectionError,check your network please."
         print "Will try again after 5 minutes."
         time.sleep(300)
-        picture_url = get_picture_url("http://cn.bing.com")
-        download_and_set(picture_url)
+        picture_url, ZH = get_picture_url("http://www.bing.com")
+        download_and_set(picture_url, ZH)
     except TypeError:
         print "Set the directory to save Bing's imgs first."
         print "For more information, use --help."
