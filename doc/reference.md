@@ -42,6 +42,12 @@ commandlines which can set a picture as wallpaper:
 
 I get it from [here][11]
 
+### About making it run automatically
+
+[Gsettings with cron][14]
+[PyNotify not working from cron?][15]
+[CronHowto][16]
+[[Solved] custom systemd service error: Error spawning dbus-launch][17]
 
 [1]: https://docs.python.org/2/library/re.html
 [2]: http://docs.python-requests.org/en/latest/user/quickstart/#raw-response-content
@@ -56,3 +62,7 @@ I get it from [here][11]
 [11]: http://thenounproject.com/term/happy/346/
 [12]: http://pymotw.com/2/argparse/
 [13]: https://docs.python.org/2/howto/argparse.html
+[14]: http://stackoverflow.com/questions/10374520/gsettings-with-cron
+[15]: http://stackoverflow.com/questions/4281821/pynotify-not-working-from-cron
+[16]: https://help.ubuntu.com/community/CronHowto#GUI_Applications
+[17]: https://bbs.archlinux.org/viewtopic.php?pid=1423853
