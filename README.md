@@ -15,10 +15,23 @@
 
 ## Usage
 
-* You need to set a directory to save the downloaded pictures, end with '/'.
+* Manually
 
-        $ wonderful_bing -d /path/to/save/pictures/
+You need to set a directory to save the download pictures, end with '/'.
 
+    $ wonderful_bing -d /path/to/save/pictures/
+
+* Automatically(recommand)
+
+1. Add it to `startup application`(in my Linux Mint16), then every time you boot 
+up your pc, this script will automatically run for you.
+
+2. Use cron. Let me give you an example:
+
+> 0 8 * * * env DISPLAY=:0 /usr/local/bin/wonderful_bing -d /path/to/save/
+
+*we need `env DISPLAY=:0`, otherwise the notify can't display at all, and remember
+the `/` at the end.*
 
 ## Snapshots
 

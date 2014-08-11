@@ -71,8 +71,8 @@ def get_picture_name(picture_url):
 
 
 def set_wallpaper(picture_path):
-    os.system('gsettings set org.gnome.desktop.background picture-uri file:' +
-              picture_path)
+    os.system('DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set org.'
+              'gnome.desktop.background picture-uri file://' + picture_path)
 
 
 def main():
