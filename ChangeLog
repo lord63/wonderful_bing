@@ -36,8 +36,5 @@ ChangeLog
 - Fix the problem in icon's path, see #4
 - Support Chinese and Englisth in notify's message, see #5
 
-
-可以使用的设置壁纸的命令：
-feh --bg-fill picture_path
-hsetroot  -extend  picture_path
-gsettings set org.gnome.desktop.background picture-uri file://picture_path
+2014.8.16 v0.4.2
+- Fix #3

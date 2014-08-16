@@ -31,7 +31,7 @@ def get_picture_url(page_url):
     match = re.search(
         "/az/hprichbg/rb/.+?(?=')", r.text)
     picture_url = match.group()
-    if len(r.history):
+    if r.history:
         ZH = 1
         picture_url = 'http://s.cn.bing.net' + picture_url
     else:

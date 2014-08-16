@@ -2,22 +2,19 @@
 # -*- coding: utf-8 -*-
 
 from setuptools import setup
-import sys
 
 try:
-    from pypandoc import convert
-    readme_md = lambda f: convert(f, 'rst')
-except ImportError:
-    sys.exit("Please install pypandoc.")
-except OSError:
-    sys.exit("You probably do not have pandoc installed.")
-
+    import pypandoc
+    long_description = pypandoc.convert('README.md','rst')
+except (IOError, ImportError):
+    with open('README.md') as f:
+        long_description = f.read()
 
 setup(
     name='wonderful_bing',
-    version='0.4.1',
+    version='0.4.2',
     description="A script download Bing's img and set as wallpaper",
-    long_description=readme_md('README.md'),
+    long_description=long_description,
     url='https://github.com/lord63/wonderful_bing',
     author='lord63',
     author_email='lord63.j@gmail.com',
@@ -34,9 +31,7 @@ setup(
     keywords='bing wallpaper',
     packages=['wonderful_bing'],
     install_requires=['requests'],
-    package_data={
-        'wonderful_bing': ['README.md', 'LICENSE', 'img/icon.png', 'img/notify.png'],
-    },
+    include_package_data=True,
     entry_points={
         'console_scripts': [
             'wonderful_bing=wonderful_bing.wonderful_bing:main']
