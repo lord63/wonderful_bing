@@ -37,26 +37,26 @@ the `/` at the end.*
 
 the first time you run it:
 
-    $ python wonderful_bing.py -d /home/lord63/pictures/bing/
+    $ wonderful_bing -d /home/lord63/pictures/bing/
     Successfully download the picture to --> /home/lord63/pictures/bing/CascadePools.jpg
     Successfully set the picture as the wallpaper. :)
 
 if you don't set the directory:
 
-    $ python wonderful_bing.py -d /home/lord63/pictures/bing/
+    $ wonderful_bing -d /home/lord63/pictures/bing/
     Set the directory to save Bing's imgs first.
     For more information, use --help.
 
 
 if the picture has been downloaded before:
 
-    $ python wonderful_bing.py -d /home/lord63/pictures/bing/
+    $ wonderful_bing -d /home/lord63/pictures/bing/
     You have downloaded the picture before.
     Have a look at it --> /home/lord63/pictures/bing/CascadePools.jpg
 
 if your pc doesn't connect to the network, it will try again after 5 mins.
 
-    $ python wonderful_bing.py -d /home/lord63/pictures/bing/
+    $ wonderful_bing -d /home/lord63/pictures/bing/
     ConnectionError,check your network please.
     Will try again after 5 minutes.
 
