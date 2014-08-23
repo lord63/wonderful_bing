@@ -32,7 +32,7 @@ commandlines which can set a picture as wallpaper:
     1.  feh --bg-fill picture_path
     2.  hsetroot  -extend  picture_path
     3.  gsettings set org.gnome.desktop.background picture-uri file://picture_path
-    
+
 ### About the arguments
 
 [PyMOTW][12]
@@ -48,6 +48,7 @@ I get it from [here][11]
 [PyNotify not working from cron?][15]
 [CronHowto][16]
 [[Solved] custom systemd service error: Error spawning dbus-launch][17]
+[Run Anacron as a user from user directory][18]
 
 [1]: https://docs.python.org/2/library/re.html
 [2]: http://docs.python-requests.org/en/latest/user/quickstart/#raw-response-content
@@ -66,3 +67,4 @@ I get it from [here][11]
 [15]: http://stackoverflow.com/questions/4281821/pynotify-not-working-from-cron
 [16]: https://help.ubuntu.com/community/CronHowto#GUI_Applications
 [17]: https://bbs.archlinux.org/viewtopic.php?pid=1423853
+[18]: http://www.wellengang.ch/?p=135

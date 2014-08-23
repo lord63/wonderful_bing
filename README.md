@@ -26,12 +26,21 @@ You need to set a directory to save the download pictures, end with '/'.
 1. Add it to `startup application`(in my Linux Mint16), then every time you boot
 up your pc, this script will automatically run for you.
 
-2. Use cron. Let me give you an example:
+2. Or use `cron`. Let me give you an example:
 
-> 0 8 * * * env DISPLAY=:0 /usr/local/bin/wonderful_bing -d /path/to/save/
+        0 8 * * * env DISPLAY=:0 /usr/local/bin/wonderful_bing -d /home/lord63/pictures/bing/
 
 *we need `env DISPLAY=:0`, otherwise the notify can't display at all, and remember
 the `/` at the end.*
+
+3. Or use `anacron`, but the original `anacron` will run the script in root, thus
+it may fail in setting the picture to wallpaper. Follow [this][6] to let you run
+`anacron` as normal user. Let me give you an example, add the following line in
+`$HOME/.anacron/anacrontab`:
+
+        1 1 wonderful_bing env DISPLAY=:0 /usr/local/bin/wonderful_bing -d /home/lord63/pictures/bing/
+
+If you find a better way, please let me know :)
 
 ## Snapshots
 
@@ -75,3 +84,4 @@ MIT License
 [3]: https://travis-ci.org/lord63/wonderful_bing.svg
 [4]: https://travis-ci.org/lord63/wonderful_bing
 [5]: http://img.shields.io/badge/Platform-Linux-blue.svg
+[6]: http://www.wellengang.ch/?p=135
