@@ -6,3 +6,6 @@ __pycache__/
 # Packages
 dist/
 *.egg-info/
+
+# virtualenv folder
+venv/

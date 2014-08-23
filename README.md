@@ -1,7 +1,7 @@
 # Wonderful_Bing
 
 [![Latest Version][1]][2]
-[![The MIT License][3]][4]
+[![Build Status][3]][4]
 ![Platform][5]
 
 
@@ -23,7 +23,7 @@ You need to set a directory to save the download pictures, end with '/'.
 
 * Automatically(recommand)
 
-1. Add it to `startup application`(in my Linux Mint16), then every time you boot 
+1. Add it to `startup application`(in my Linux Mint16), then every time you boot
 up your pc, this script will automatically run for you.
 
 2. Use cron. Let me give you an example:
@@ -72,6 +72,6 @@ MIT License
 
 [1]: http://img.shields.io/pypi/v/wonderful_bing.svg
 [2]: https://pypi.python.org/pypi/wonderful_bing
-[3]: http://img.shields.io/badge/license-MIT-yellow.svg
-[4]: https://github.com/lord63/wonderful_bing/blob/master/LICENSE
-[5]: http://img.shields.io/badge/Platform-Linux-orange.svg
+[3]: https://travis-ci.org/lord63/wonderful_bing.svg
+[4]: https://travis-ci.org/lord63/wonderful_bing
+[5]: http://img.shields.io/badge/Platform-Linux-blue.svg
