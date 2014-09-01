@@ -44,11 +44,11 @@ I get it from [here][11]
 
 ### About making it run automatically
 
-[Gsettings with cron][14]
-[PyNotify not working from cron?][15]
-[CronHowto][16]
-[[Solved] custom systemd service error: Error spawning dbus-launch][17]
-[Run Anacron as a user from user directory][18]
+[Gsettings with cron][14]  
+[PyNotify not working from cron?][15]  
+[CronHowto][16]  
+[[Solved] custom systemd service error: Error spawning dbus-launch][17]  
+[Run Anacron as a user from user directory][18]  
 
 [1]: https://docs.python.org/2/library/re.html
 [2]: http://docs.python-requests.org/en/latest/user/quickstart/#raw-response-content
