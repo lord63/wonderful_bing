@@ -4,14 +4,17 @@
 [![Build Status][3]][4]
 ![Platform][5]
 
-
 ## Requirements
-
 
 * Linux platform
 * Python 2.7
 * Requests lib
+* python-notify
 
+## Install
+
+    $ sudo pip install wonderful_bing
+    $ sudo apt-get install python-notify
 
 ## Usage
 
@@ -72,7 +75,6 @@ if your pc doesn't connect to the network, it will try again after 5 mins.
 and the notify should looks like this:
 
 ![](./wonderful_bing/img/notify.png)
-
 
 ## License
 
