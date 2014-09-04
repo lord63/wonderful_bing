@@ -3,6 +3,8 @@
 
 from setuptools import setup
 
+from wonderful_bing import wonderful_bing
+
 try:
     import pypandoc
     long_description = pypandoc.convert('README.md','rst')
@@ -12,7 +14,7 @@ except (IOError, ImportError):
 
 setup(
     name='wonderful_bing',
-    version='0.4.2',
+    version=wonderful_bing.__version__,
     description="A script download Bing's img and set as wallpaper",
     long_description=long_description,
     url='https://github.com/lord63/wonderful_bing',
