@@ -28,20 +28,21 @@ import requests
 
 
 class WonderfulBing(object):
-    def __init__(self,config):
-        # We can get all the information we need from this url, see issue#7
+    def __init__(self, config):
+        # Get all the information we need from this url, see issue#7
         self.url = "http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=\
                    1&nc=1409879295618&pid=hp"
-        self.reponse = requests.get(self.url)
-        self.story = requests.get(self.url).json()["images"][0]["copyright"]
-        self.picture_url = requests.get(self.url).json()["images"][0]["url"]
-        self.config = config
+        information = requests.get(self.url).json()["images"][0]
+        self.copyright = information["copyright"]
+        self.picture_url = information["url"]
+        self.directory = config['directory']
 
     def show_notify(self):
         title = "Today's Picture Story"
+        story_content = re.match(".+(?=\()", self.copyright).group()
         notification = pynotify.Notification(
-            title, self.story,
-            os.path.dirname(os.path.realpath(__file__))+'/img/icon.png')
+            title, story_content,
+            os.path.dirname(os.path.realpath(__file__)) + '/img/icon.png')
         notification.show()
 
     def get_picture_name(self):
@@ -51,25 +52,29 @@ class WonderfulBing(object):
         return picture_name
 
     def set_wallpaper(self, picture_path):
-        os.system('DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set org.'
-                  'gnome.desktop.background picture-uri file://' + picture_path)
+        # We use this command to make it work when using cron, see #3
+        os.system('DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings \
+                  set org.gnome.desktop.background picture-uri file://' +
+                  picture_path)
 
     def download_and_set(self):
         picture_name = self.get_picture_name()
-        picture_path = self.config['directory'] + picture_name
+        picture_path = self.directory + picture_name
         if os.path.exists(picture_path):
             print "You have downloaded the picture before."
-            print "Have a look at it --> " + picture_path
+            print "Have a look at it --> {}".format(picture_path)
             return
-        # sleep for two seconds, otherwise the newly setted wallpaper will be
-        # setted back by the system when your system boots up if you have added
-        # this script to autostart.
+        # Sleep for two seconds, otherwise the newly setted wallpaper
+        # will be setted back by the system when your system boots up
+        # if you have added this script to autostart.
         time.sleep(2)
-        r = requests.get(self.picture_url, stream=True)  # To get the raw content
+        # Set stream to true to get the raw content
+        r = requests.get(self.picture_url, stream=True)
         with open(picture_path, "wb") as f:
             for chunk in r.iter_content(1024):
                 f.write(chunk)
-        print "Successfully download the picture to --> " + picture_path
+        print "Successfully download the picture to --> {}.".format(
+            picture_path)
         self.set_wallpaper(picture_path)
         print "Successfully set the picture as the wallpaper. :)"
         self.show_notify()
