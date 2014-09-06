@@ -37,4 +37,9 @@ ChangeLog
 - Support Chinese and Englisth in notify's message, see #5
 
 2014.8.16 v0.4.2
-- Fix #3
+- Fix the problem that it didn't work with cron, see #3
+
+2014.9.6 v0.4.3
+- Add version
+- Try to use class to do it
+- Fix the problem that failing to get story content, see #7
