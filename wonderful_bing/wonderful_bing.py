@@ -20,6 +20,7 @@ __copyright__ = "Copyright 2014 lord63"
 import re
 import time
 import os
+import sys
 import argparse
 import pynotify
 pynotify.init('Wonderful_Bing')
@@ -92,6 +93,9 @@ def main():
         '-d', dest='directory',
         help="set the directory to save Bing's imgs, end with '/'")
     config = vars(parser.parse_args())
+    if not config['directory']:
+        sys.exit("Set the directory to save Bing's imgs first.\n"
+                 "For more information, use --help.")
 
     bing = WonderfulBing(config)
     try:
