@@ -38,14 +38,16 @@ class WonderfulBing(object):
         self.directory = config['directory']
 
     def show_notify(self):
+        """show the notify to get to know the picture story"""
         title = "Today's Picture Story"
-        story_content = re.match(".+(?=\()", self.copyright).group()
+        story_content = re.match(r".+(?=\()", self.copyright).group()
         notification = pynotify.Notification(
             title, story_content,
             os.path.dirname(os.path.realpath(__file__)) + '/img/icon.png')
         notification.show()
 
     def get_picture_name(self):
+        """get a nice picture name from the download url"""
         match = re.search(
             "(?<=/az/hprichbg/rb/).+?(?=_)", self.picture_url)
         picture_name = match.group() + '.jpg'
@@ -69,9 +71,9 @@ class WonderfulBing(object):
         # if you have added this script to autostart.
         time.sleep(2)
         # Set stream to true to get the raw content
-        r = requests.get(self.picture_url, stream=True)
+        request = requests.get(self.picture_url, stream=True)
         with open(picture_path, "wb") as f:
-            for chunk in r.iter_content(1024):
+            for chunk in request.iter_content(1024):
                 f.write(chunk)
         print "Successfully download the picture to --> {}.".format(
             picture_path)
