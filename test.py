@@ -2,43 +2,33 @@
 # -*- coding: utf-8 -*-
 
 import re
-import requests
+import os
+import unittest
+from subprocess import Popen
+from subprocess import call
+
+from wonderful_bing.wonderful_bing import WonderfulBing
+
+current_directory = os.path.abspath(os.path.dirname(__file__))
+directory_with_slash = current_directory + '/'
 
 
-class WonderfulBing(object):
-    def __init__(self, url, redirects=True):
-        self.url = url
-        self.response = requests.get(url, allow_redirects=redirects)
+def test_initial():
+    wonderful_bing = WonderfulBing({'directory': directory_with_slash})
+    assert wonderful_bing.copyright
+    assert wonderful_bing.picture_url
 
-    def test_picture_url(self):
-        picture_url = re.search(
-            "/az/hprichbg/rb/.+?(?=')", self.response.text).group()
-        return picture_url
-
-    def test_picture_name(self, picture_url):
-        picture_name = re.search(
-            "(?<=/az/hprichbg/rb/).+?(?=_)", picture_url).group()
-        return picture_name
-
-    def test_story_name(self):
-        story_name = re.search(
-            '((?<=id="sh_cp" title=")|\
-            (?<=class="sc_light" title=")).*(?=\(\\xa9)',
-            self.response.text).group()
-        return story_name
-
-
-def test_ZH():
-    bing_ZH = WonderfulBing('http://cn.bing.com')
-    picture_url = bing_ZH.test_picture_url()
-    assert picture_url
-    assert bing_ZH.test_picture_name(picture_url)
-    assert bing_ZH.test_story_name()
-
-
-def test_EN():
-    bing_EN = WonderfulBing('http://www.bing.com', False)
-    picture_url = bing_EN.test_picture_url()
-    assert picture_url
-    assert bing_EN.test_picture_name(picture_url)
-    assert bing_EN.test_story_name()
+def test_command():
+    help_message_status = call([
+        'python', './wonderful_bing/wonderful_bing.py', '-h'])
+    version_status = call(['python', './wonderful_bing/wonderful_bing.py',
+                            '-V'])
+    no_dir_specified_status = call([
+        'python', './wonderful_bing/wonderful_bing.py'])
+    dir_specified_status = call([
+        'python', './wonderful_bing/wonderful_bing.py',
+        '-d', '{}'.format(directory_with_slash)])
+    assert not version_status
+    assert not help_message_status
+    assert no_dir_specified_status
+    assert not dir_specified_status
