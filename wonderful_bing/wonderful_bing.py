@@ -21,9 +21,8 @@ import re
 import time
 import os
 import sys
+from os import path
 import argparse
-import pynotify
-pynotify.init('Wonderful_Bing')
 
 import requests
 
@@ -40,12 +39,11 @@ class WonderfulBing(object):
 
     def show_notify(self):
         """show the notify to get to know the picture story"""
-        title = "Today's Picture Story"
-        story_content = re.match(r".+(?=\()", self.copyright).group()
-        notification = pynotify.Notification(
-            title, story_content,
-            os.path.dirname(os.path.realpath(__file__)) + '/img/icon.png')
-        notification.show()
+        title = "Today\\'s\ Picture\ Story"
+        story_content = re.match(".+(?=\()", self.copyright).group()
+        notify_icon = path.dirname(path.realpath(__file__)) + '/img/icon.png'
+        os.system("notify-send -a wonderful_bing -i {0} {1} {2}".format(
+                  notify_icon, title, story_content))
 
     def get_picture_name(self):
         """get a nice picture name from the download url"""
@@ -63,7 +61,7 @@ class WonderfulBing(object):
     def download_and_set(self):
         picture_name = self.get_picture_name()
         picture_path = self.directory + picture_name
-        if os.path.exists(picture_path):
+        if path.exists(picture_path):
             print "You have downloaded the picture before."
             print "Have a look at it --> {}".format(picture_path)
             return
