@@ -24,6 +24,7 @@ You can get some examples under `/usr/share/doc/python-notify/examples`
 other people's examples: [example1][4] [example2][5] [example3][6]
 
 [Desktop Notifications Specification][7]
+[Arch-Wiki Desktop notifications][19]
 
 ### About commandline:
 
@@ -68,3 +69,4 @@ I get it from [here][11]
 [16]: https://help.ubuntu.com/community/CronHowto#GUI_Applications
 [17]: https://bbs.archlinux.org/viewtopic.php?pid=1423853
 [18]: http://www.wellengang.ch/?p=135
+[19]: https://wiki.archlinux.org/index.php/Desktop_notifications
