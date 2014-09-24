@@ -65,7 +65,7 @@ class WonderfulBing(object):
         if path.exists(picture_path):
             print "You have downloaded the picture before."
             print "Have a look at it --> {}".format(picture_path)
-            return
+            sys.exit()
         # Sleep for two seconds, otherwise the newly setted wallpaper
         # will be setted back by the system when your system boots up
         # if you have added this script to autostart.

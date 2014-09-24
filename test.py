@@ -14,7 +14,11 @@ class WonderfulBingTestCase(unittest.TestCase):
         self.directory_with_slash = self.current_directory + '/'
 
     def tearDown(self):
-        call(['rm','*.jpg'])
+        """delete the download picture"""
+        for root, dirs, files in os.walk(self.current_directory):
+            for file in files:
+                if file.endswith('.jpg'):
+                    os.remove(file)
 
     def test_initial(self):
         wonderful_bing = WonderfulBing({'directory': self.directory_with_slash})
@@ -24,7 +28,7 @@ class WonderfulBingTestCase(unittest.TestCase):
     def test_get_picture_name(self):
         wonderful_bing = WonderfulBing({'directory': self.directory_with_slash})
         picture_name = wonderful_bing.get_picture_name()
-        assert not picture_name
+        assert picture_name
 
     def test_command(self):
         help_message_status = call([
@@ -40,3 +44,15 @@ class WonderfulBingTestCase(unittest.TestCase):
         assert not help_message_status
         assert no_dir_specified_status
         assert not dir_specified_status
+
+    def test_picture_has_been_downloaded(self):
+        dir_specified_status = call([
+            'python', './wonderful_bing/wonderful_bing.py',
+            '-d', '{}'.format(self.directory_with_slash)])
+        picture_has_been_downloaded_status = call([
+            'python', './wonderful_bing/wonderful_bing.py',
+            '-d', '{}'.format(self.directory_with_slash)])
+        assert not picture_has_been_downloaded_status
+
+if __name__ == '__main__':
+    unittest.main()
