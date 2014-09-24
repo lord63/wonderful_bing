@@ -40,7 +40,8 @@ class WonderfulBing(object):
     def show_notify(self):
         """show the notify to get to know the picture story"""
         title = "Today\\'s\ Picture\ Story"
-        story_content = re.match(".+(?=\()", self.copyright).group()
+        story_content = re.match(
+            ".+(?=\()", self.copyright).group().encode('utf-8')
         notify_icon = path.dirname(path.realpath(__file__)) + '/img/icon.png'
         os.system("notify-send -a wonderful_bing -i {0} {1} {2}".format(
                   notify_icon, title, story_content))
