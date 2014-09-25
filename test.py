@@ -22,14 +22,16 @@ class WonderfulBingTestCase(unittest.TestCase):
 
     def test_initial(self):
         print "\n----------test_initial begin----------"
-        wonderful_bing = WonderfulBing({'directory': self.current_dir_with_slash})
+        wonderful_bing = WonderfulBing(
+            {'directory': self.current_dir_with_slash})
         assert wonderful_bing.copyright
         assert wonderful_bing.picture_url
         print "----------test_initial end----------"
 
     def test_get_picture_name(self):
         print "\n----------test_get_picture_name begin----------"
-        wonderful_bing = WonderfulBing({'directory': self.current_dir_with_slash})
+        wonderful_bing = WonderfulBing(
+            {'directory': self.current_dir_with_slash})
         picture_name = wonderful_bing.get_picture_name()
         assert picture_name
         print "----------test_get_picture_name end----------"
@@ -50,9 +52,8 @@ class WonderfulBingTestCase(unittest.TestCase):
 
     def test_picture_has_been_downloaded(self):
         print "\n----------test_picture_has_been_downloaded begin----------"
-        dir_specified_status = call([
-            'python', './wonderful_bing/wonderful_bing.py',
-            '-d', '{}'.format(self.current_dir_with_slash)])
+        call(['python', './wonderful_bing/wonderful_bing.py',
+              '-d', '{}'.format(self.current_dir_with_slash)])
         picture_has_been_downloaded_status = call([
             'python', './wonderful_bing/wonderful_bing.py',
             '-d', '{}'.format(self.current_dir_with_slash)])
