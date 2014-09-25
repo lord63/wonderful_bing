@@ -9,12 +9,12 @@
 * Linux platform
 * Python 2.7
 * Requests lib
-* Libnotify
+* Libnotify-bin
 
 ## Install
 
     $ sudo pip install wonderful_bing
-    $ sudo apt-get install libnotify
+    $ sudo apt-get install libnotify-bin
 
 ## Usage
 
