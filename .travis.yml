@@ -2,12 +2,14 @@ language: python
 
 python:
     - "2.7"
-    
-install:
+
+before_install:
+    - apt-get update -qq
+    - apt-get install -qq libnotify
     - pip install requests
-    
+
 script:
     - nosetests
-    
+
 notifications:
     email: false
