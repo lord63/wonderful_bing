@@ -95,6 +95,8 @@ def main():
     if not config['directory']:
         sys.exit("Set the directory to save Bing's imgs first.\n"
                  "For more information, use --help.")
+    if not path.exists(config['directory']):
+        sys.exit('No such directory :(')
 
     bing = WonderfulBing(config)
     try:
