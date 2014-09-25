@@ -35,6 +35,8 @@ class WonderfulBing(object):
         information = requests.get(self.url).json()["images"][0]
         self.copyright = information["copyright"]
         self.picture_url = information["url"]
+        if not self.picture_url.startswith('http'):
+            self.picture_url = 'http://www.bing.com' + self.picture_url
         self.directory = config['directory']
 
     def show_notify(self):
