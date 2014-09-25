@@ -9,12 +9,12 @@
 * Linux platform
 * Python 2.7
 * Requests lib
-* python-notify
+* Libnotify
 
 ## Install
 
     $ sudo pip install wonderful_bing
-    $ sudo apt-get install python-notify
+    $ sudo apt-get install libnotify
 
 ## Usage
 
@@ -26,20 +26,21 @@ You need to set a directory to save the download pictures, end with '/'.
 
 * Automatically(recommand)
 
-1. Add it to `startup application`(in my Linux Mint16), then every time you boot
-up your pc, this script will automatically run for you.
+1. Add it to `startup application`(in my Linux Mint16) if you power on your pc
+   and power off your pc regularly, then every time you boot up your pc, this
+   script will automatically run for you.
 
 2. Or use `cron`. Let me give you an example:
 
         0 8 * * * env DISPLAY=:0 /usr/local/bin/wonderful_bing -d /home/lord63/pictures/bing/
 
-*we need `env DISPLAY=:0`, otherwise the notify can't display at all, and remember
-the `/` at the end.*
+   *we need `env DISPLAY=:0`, otherwise the notify can't display at all, and remember
+   the `/` at the end.*
 
-3. Or use `anacron`, but the original `anacron` will run the script in root, thus
-it may fail in setting the picture to wallpaper. Follow [this][6] to let you run
-`anacron` as normal user. Let me give you an example, add the following line in
-`$HOME/.anacron/anacrontab`:
+3. Or use `anacron` if you ofen hang up your pc instead of powering off it.
+   but the original `anacron` will run the script in root, thus it may fail in setting the 
+   picture to wallpaper. Follow [this][6] to let you run `anacron` as normal user. 
+   Let me give you an example, add the following line in `$HOME/.anacron/anacrontab`:
 
         1 1 wonderful_bing env DISPLAY=:0 /usr/local/bin/wonderful_bing -d /home/lord63/pictures/bing/
 
