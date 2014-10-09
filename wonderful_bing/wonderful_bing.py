@@ -43,9 +43,9 @@ class WonderfulBing(object):
         """show the notify to get to know the picture story"""
         title = "Today\\'s\ Picture\ Story"
         story_content = re.match(
-            ".+(?=\()", self.copyright).group().encode('utf-8')
+            ".+(?=\(\xa9)", self.copyright).group().encode('utf-8')
         notify_icon = path.dirname(path.realpath(__file__)) + '/img/icon.png'
-        os.system("notify-send -a wonderful_bing -i {0} {1} {2}".format(
+        os.system("notify-send -a wonderful_bing -i {0} {1} '{2}'".format(
                   notify_icon, title, story_content))
 
     def get_picture_name(self):
@@ -66,7 +66,7 @@ class WonderfulBing(object):
         picture_path = self.directory + picture_name
         if path.exists(picture_path):
             print "You have downloaded the picture before."
-            print "Have a look at it --> {}".format(picture_path)
+            print "Have a look at it --> {0}".format(picture_path)
             sys.exit()
         # Sleep for two seconds, otherwise the newly setted wallpaper
         # will be setted back by the system when your system boots up
@@ -77,7 +77,7 @@ class WonderfulBing(object):
         with open(picture_path, "wb") as f:
             for chunk in request.iter_content(1024):
                 f.write(chunk)
-        print "Successfully download the picture to --> {}.".format(
+        print "Successfully download the picture to --> {0}.".format(
             picture_path)
         self.set_wallpaper(picture_path)
         print "Successfully set the picture as the wallpaper. :)"
@@ -89,7 +89,7 @@ def main():
         prog='wonderful_bing',
         description="Wonderful_bing's configuration")
     parser.add_argument('-V', '--version', action='version',
-                        version='%(prog)s {}'.format(__version__))
+                        version='%(prog)s {0}'.format(__version__))
     parser.add_argument(
         '-d', dest='directory',
         help="set the directory to save Bing's imgs, end with '/'")
