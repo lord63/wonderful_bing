@@ -43,3 +43,13 @@ ChangeLog
 - Add version
 - Try to use class to do it
 - Fix the problem that failing to get story content, see #7
+
+2014.10.11 v0.5.0
+- Refine test
+- Use notify-send to show the notify
+- Drop python2.6 support
+- Add check whether the picture url is valid or not, #9
+- Add more check(path not exist; not specified the path;
+  path not end with slash)
+
+
