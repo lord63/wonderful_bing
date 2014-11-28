@@ -19,10 +19,10 @@ __copyright__ = "Copyright 2014 lord63"
 
 import re
 import time
-import os
 import sys
 from os import path
 import argparse
+import subprocess
 
 import requests
 
@@ -41,12 +41,13 @@ class WonderfulBing(object):
 
     def show_notify(self):
         """show the notify to get to know the picture story"""
-        title = "Today\\'s\ Picture\ Story"
+        title = "Today's Picture Story"
         story_content = re.match(
             ".+(?=\(\xa9)", self.copyright).group().encode('utf-8')
         notify_icon = path.dirname(path.realpath(__file__)) + '/img/icon.png'
-        os.system("notify-send -a wonderful_bing -i {0} {1} '{2}'".format(
-                  notify_icon, title, story_content))
+        safe_story_content = story_content.replace('"', '\"')
+        subprocess.Popen(["notify-send", "-a", "wonderful_bing", "-i",
+                          notify_icon, title, safe_story_content])
 
     def get_picture_name(self):
         """get a nice picture name from the download url"""
@@ -57,9 +58,10 @@ class WonderfulBing(object):
 
     def set_wallpaper(self, picture_path):
         # We use this command to make it work when using cron, see #3
-        os.system('DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings \
-                  set org.gnome.desktop.background picture-uri file://' +
-                  picture_path)
+        subprocess.Popen(
+            "DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set \
+            org.gnome.desktop.background picture-uri file://{0}".format(
+                picture_path), shell=True)
 
     def download_and_set(self):
         picture_name = self.get_picture_name()
