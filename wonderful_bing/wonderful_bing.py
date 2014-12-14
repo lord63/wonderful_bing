@@ -19,10 +19,12 @@ __copyright__ = "Copyright 2014 lord63"
 
 import re
 import time
+import os
 import sys
 from os import path
 import argparse
 import subprocess
+from commands import getoutput
 
 import requests
 
@@ -58,10 +60,19 @@ class WonderfulBing(object):
 
     def set_wallpaper(self, picture_path):
         # We use this command to make it work when using cron, see #3
-        subprocess.Popen(
-            "DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set \
-            org.gnome.desktop.background picture-uri file://{0}".format(
-                picture_path), shell=True)
+        de = self.detect_de()
+        if de=='gnome':
+            subprocess.Popen(
+                "DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set \
+                org.gnome.desktop.background picture-uri file://{0}".format(
+                    picture_path), shell=True)
+        elif de=='xfce':
+            subprocess.Popen(
+                "DISPLAY=:0 xfconf-query -c xfce4-desktop -p \
+                      /backdrop/screen0/monitor0/image-path -s {0}".format(
+                    picture_path), shell=True)
+        else:
+            pass
 
     def download_and_set(self):
         picture_name = self.get_picture_name()
@@ -84,6 +95,21 @@ class WonderfulBing(object):
         self.set_wallpaper(picture_path)
         print "Successfully set the picture as the wallpaper. :)"
         self.show_notify()
+
+    def detect_de(self):
+        de = 'generic'
+        if os.environ.get('KDE_FULL_SESSION') == 'true':
+            de = 'kde'
+        elif os.environ.get('GNOME_DESKTOP_SESSION_ID'):
+            de = 'gnome'
+        else:
+            try:
+                info = getoutput('xprop -root')
+                if 'XFCE_DESKTOP_WINDOW' in info:
+                    de = 'xfce'
+            except (OSError, RuntimeError):
+                pass
+        return de
 
 
 def main():
