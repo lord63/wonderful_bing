@@ -39,7 +39,7 @@ class WonderfulBing(object):
         self.picture_url = information["url"]
         if not self.picture_url.startswith('http'):
             self.picture_url = 'http://www.bing.com' + self.picture_url
-        self.directory = config['directory']
+        self.directory = path.abspath(config['directory']) + '/'
 
     def show_notify(self):
         """show the notify to get to know the picture story"""
@@ -125,8 +125,6 @@ def main():
     if not config['directory']:
         sys.exit("Set the directory to save Bing's imgs first.\n"
                  "For more information, use --help.")
-    if not config['directory'].endswith('/'):
-        config['directory'] = config['directory'] + '/'
     if not path.exists(config['directory']):
         sys.exit('No such directory :(')
 
