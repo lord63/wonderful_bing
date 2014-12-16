@@ -6,10 +6,10 @@
 
 ## Requirements
 
-* Linux platform
+* Linux platform(Currently support gnome and xfce)
 * Python 2.7
 * Requests lib
-* Libnotify-bin
+* Libnotify-bin(for Arch: libnotify)
 
 ## Install
 
