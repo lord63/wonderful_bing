@@ -60,19 +60,23 @@ class WonderfulBing(object):
 
     def set_wallpaper(self, picture_path):
         # We use this command to make it work when using cron, see #3
-        de = self.detect_de()
-        if de == 'gnome':
+        desktop_environment = self.detect_desktop_environment()
+        if desktop_environment == 'gnome':
             subprocess.Popen(
                 "DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set \
                 org.gnome.desktop.background picture-uri file://{0}".format(
                     picture_path), shell=True)
-        elif de == 'xfce':
+        elif desktop_environment == 'xfce':
             subprocess.Popen(
                 "DISPLAY=:0 xfconf-query -c xfce4-desktop -p \
-                      /backdrop/screen0/monitor0/image-path -s {0}".format(
+                /backdrop/screen0/monitor0/image-path -s {0}".format(
                     picture_path), shell=True)
         else:
-            pass
+            sys.exit(
+                "Currently we don't support your desktop_environment: {} \n"
+                "Please file an issue or make a pull request :) \n"
+                "https://github.com/lord63/wonderful_bing".format(
+                    desktop_environment))
 
     def download_and_set(self):
         picture_name = self.get_picture_name()
@@ -96,20 +100,20 @@ class WonderfulBing(object):
         print "Successfully set the picture as the wallpaper. :)"
         self.show_notify()
 
-    def detect_de(self):
-        de = 'generic'
+    def detect_desktop_environment(self):
+        desktop_environment = 'generic'
         if os.environ.get('KDE_FULL_SESSION') == 'true':
-            de = 'kde'
+            desktop_environment = 'kde'
         elif os.environ.get('GNOME_DESKTOP_SESSION_ID'):
-            de = 'gnome'
+            desktop_environment = 'gnome'
         else:
             try:
                 info = getoutput('xprop -root')
                 if 'XFCE_DESKTOP_WINDOW' in info:
-                    de = 'xfce'
+                    desktop_environment = 'xfce'
             except (OSError, RuntimeError):
                 pass
-        return de
+        return desktop_environment
 
 
 def main():
