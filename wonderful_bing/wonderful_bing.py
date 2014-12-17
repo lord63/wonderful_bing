@@ -61,12 +61,12 @@ class WonderfulBing(object):
     def set_wallpaper(self, picture_path):
         # We use this command to make it work when using cron, see #3
         de = self.detect_de()
-        if de=='gnome':
+        if de == 'gnome':
             subprocess.Popen(
                 "DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set \
                 org.gnome.desktop.background picture-uri file://{0}".format(
                     picture_path), shell=True)
-        elif de=='xfce':
+        elif de == 'xfce':
             subprocess.Popen(
                 "DISPLAY=:0 xfconf-query -c xfce4-desktop -p \
                       /backdrop/screen0/monitor0/image-path -s {0}".format(
