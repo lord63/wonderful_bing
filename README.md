@@ -56,7 +56,7 @@ the first time you run it:
 
 if you don't set the directory:
 
-    $ wonderful_bing -d /home/lord63/pictures/bing/
+    $ wonderful_bing
     Set the directory to save Bing's imgs first.
     For more information, use --help.
 
