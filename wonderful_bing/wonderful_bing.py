@@ -58,7 +58,7 @@ class WonderfulBing(object):
         picture_name = match.group() + '.jpg'
         return picture_name
 
-    def set_wallpaper(self, picture_path):
+    def set_wallpaper(self, picture_path):  # pragma: no cover
         # We use this command to make it work when using cron, see #3
         desktop_environment = self.detect_desktop_environment()
         if desktop_environment == 'gnome':
@@ -100,7 +100,7 @@ class WonderfulBing(object):
         print "Successfully set the picture as the wallpaper. :)"
         self.show_notify()
 
-    def detect_desktop_environment(self):
+    def detect_desktop_environment(self):  # pragma: no cover
         desktop_environment = 'generic'
         if os.environ.get('KDE_FULL_SESSION') == 'true':
             desktop_environment = 'kde'

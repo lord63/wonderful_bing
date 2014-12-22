@@ -42,7 +42,7 @@ class WonderfulBingTestCase(unittest.TestCase):
             '-d', '{}'.format(self.directory)])
         assert not version_status
         assert not help_message_status
-        assert not dir_specified_status
+        assert dir_specified_status
 
     def test_picture_has_been_downloaded(self):
         call(['python', './wonderful_bing/wonderful_bing.py',
