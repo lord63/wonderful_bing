@@ -7,9 +7,13 @@ before_install:
     - sudo apt-get update -qq
     - sudo apt-get install -qq libnotify-bin
     - pip install requests
+    - pip install coveralls
 
 script:
-    - nosetests
+    - nosetests -v --with-coverage --cover-package=wonderful_bing
+
+after_success:
+    - coveralls
 
 notifications:
     email: false

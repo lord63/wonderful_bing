@@ -1,0 +1,12 @@
+[run]
+source = wonderful_bing
+
+[report]
+exclude_lines =
+    pragma: no cover
+    pass
+    if 0:
+    except OSError
+    except RuntimeError
+    except requests.exceptions.ConnectionError
+    if __name__ == .__main__.:
