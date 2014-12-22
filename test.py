@@ -32,18 +32,6 @@ class WonderfulBingTestCase(unittest.TestCase):
         picture_name = wonderful_bing.get_picture_name()
         assert picture_name
 
-    def test_common_command(self):
-        help_message_status = call([
-            'python', './wonderful_bing/wonderful_bing.py', '-h'])
-        version_status = call(['python', './wonderful_bing/wonderful_bing.py',
-                               '-V'])
-        dir_specified_status = call([
-            'python', './wonderful_bing/wonderful_bing.py',
-            '-d', '{}'.format(self.directory)])
-        assert not version_status
-        assert not help_message_status
-        assert dir_specified_status
-
     def test_picture_has_been_downloaded(self):
         call(['python', './wonderful_bing/wonderful_bing.py',
               '-d', '{}'.format(self.directory)])
@@ -62,6 +50,18 @@ class WonderfulBingTestCase(unittest.TestCase):
             'python', './wonderful_bing/wonderful_bing.py',
             '-d', '{}'.format(self.not_exist_dir)])
         assert dir_not_exist_status
+
+    def test_common_command(self):
+        help_message_status = call([
+            'python', './wonderful_bing/wonderful_bing.py', '-h'])
+        version_status = call(['python', './wonderful_bing/wonderful_bing.py',
+                               '-V'])
+        dir_specified_status = call([
+            'python', './wonderful_bing/wonderful_bing.py',
+            '-d', '{}'.format(self.directory)])
+        assert not version_status
+        assert not help_message_status
+        assert dir_specified_status
 
 if __name__ == '__main__':
     unittest.main()
