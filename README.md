@@ -3,6 +3,7 @@
 [![Latest Version][1]][2]
 [![Build Status][3]][4]
 ![Platform][5]
+[![Coverage Status][7]][8]
 
 ## Requirements
 
@@ -88,3 +89,5 @@ MIT License
 [4]: https://travis-ci.org/lord63/wonderful_bing
 [5]: http://img.shields.io/badge/Platform-Linux-blue.svg
 [6]: http://www.wellengang.ch/?p=135
+[7]: https://img.shields.io/coveralls/lord63/wonderful_bing.svg
+[8]: https://coveralls.io/r/lord63/wonderful_bing
