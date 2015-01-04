@@ -1,9 +1,7 @@
-
 ### About regular expression:
 
-[python standard library: re][1]
-
-[a simple tutotial][10](in chinese)
+* [python standard library: re][1]
+* [a simple tutotial][10](in chinese)
 
 ### About Requests:
 
@@ -23,8 +21,8 @@ You can get some examples under `/usr/share/doc/python-notify/examples`
 
 other people's examples: [example1][4] [example2][5] [example3][6]
 
-[Desktop Notifications Specification][7]
-[Arch-Wiki Desktop notifications][19]
+* [Desktop Notifications Specification][7]
+* [Arch-Wiki Desktop notifications][19]
 
 ### About commandline:
 
@@ -36,8 +34,8 @@ commandlines which can set a picture as wallpaper:
 
 ### About the arguments
 
-[PyMOTW][12]
-[The standard library documentation for this module][13]
+* [PyMOTW][12]
+* [The standard library documentation for this module][13]
 
 ### About the icon
 
@@ -45,11 +43,18 @@ I get it from [here][11]
 
 ### About making it run automatically
 
-[Gsettings with cron][14]  
-[PyNotify not working from cron?][15]  
-[CronHowto][16]  
-[[Solved] custom systemd service error: Error spawning dbus-launch][17]  
-[Run Anacron as a user from user directory][18]  
+* [Gsettings with cron][14]
+* [PyNotify not working from cron?][15]
+* [CronHowto][16]
+* [[Solved] custom systemd service error: Error spawning dbus-launch][17]
+* [Run Anacron as a user from user directory][18]
+
+### detect desktop environment
+
+* [What is my current desktop environment?](http://stackoverflow.com/questions/2035657/what-is-my-current-desktop-environment)
+* [python-desktop](https://github.com/revolunet/python-desktop/blob/master/__init__.py)
+* [Desktop session detection python](http://h3manth.com/content/desktop-session-detection-python)
+* [Python check desktop environment](http://ubuntuforums.org/showthread.php?t=1139057)
 
 [1]: https://docs.python.org/2/library/re.html
 [2]: http://docs.python-requests.org/en/latest/user/quickstart/#raw-response-content
