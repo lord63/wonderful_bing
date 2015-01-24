@@ -56,6 +56,11 @@ I get it from [here][11]
 * [Desktop session detection python](http://h3manth.com/content/desktop-session-detection-python)
 * [Python check desktop environment](http://ubuntuforums.org/showthread.php?t=1139057)
 
+### easy way to download images from Bing
+
+* [Is there a way to get Bing's photo of the day?](http://stackoverflow.com/questions/10639914/is-there-a-way-to-get-bings-photo-of-the-day)
+* [bing image archive](http://www.istartedsomething.com/bingimages/)
+
 [1]: https://docs.python.org/2/library/re.html
 [2]: http://docs.python-requests.org/en/latest/user/quickstart/#raw-response-content
 [3]: http://xiaoxia.org/2011/07/19/save-network-flow-scheme-and-networkmonitor-tips-applet/
