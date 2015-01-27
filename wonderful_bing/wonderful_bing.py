@@ -72,7 +72,7 @@ class WonderfulBing(object):
                     picture_path), shell=True)
         else:
             sys.exit(
-                "Currently we don't support your desktop_environment: {} \n"
+                "Currently we don't support your desktop_environment: {0} \n"
                 "Please file an issue or make a pull request :) \n"
                 "https://github.com/lord63/wonderful_bing".format(
                     desktop_environment))
@@ -141,15 +141,14 @@ class WonderfulBing(object):
                 return "kde"
             elif os.environ.get('GNOME_DESKTOP_SESSION_ID'):
                 if "deprecated" not in os.environ.get(
-                   'GNOME_DESKTOP_SESSION_ID'):
-                        return "gnome2"
+                        'GNOME_DESKTOP_SESSION_ID'):
+                    return "gnome2"
             # From http://ubuntuforums.org/showthread.php?t=652320
             elif self.is_running("xfce-mcs-manage"):
                 return "xfce4"
             elif self.is_running("ksmserver"):
                 return "kde"
         return "unknown"
-
 
     def is_running(self, process):
         # From <http://www.bloggerpolis.com/2011/05/how-to-check-if-a-
