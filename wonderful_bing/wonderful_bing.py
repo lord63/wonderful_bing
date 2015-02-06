@@ -110,19 +110,20 @@ A wallpaper a day, keep the doctor away.
 Usage:
   bing set [-d DIRECTORY] ENVIRONMENT
   bing story
-  bing --version
+  bing -V | --version
+  bing -h | --help
 
 Arguments:
   ENVIRONMENT                your desktop environment
 
 Options:
-  -h --help                  show the help info and exit
-  --version                  show the version and exit
+  -h, --help                 show the help info and exit
+  -V, --version              show the version and exit
   -d, --directory=DIRECTORY  specify where to save the download picture
                              [default: /tmp]
 
 """
-    arguments = docopt(doc, version=__version__, options_first=True)
+    arguments = docopt(doc, version=__version__)
     if not path.exists(arguments['--directory']):
         sys.exit('No such directory :(')
 
