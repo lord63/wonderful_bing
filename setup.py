@@ -35,6 +35,6 @@ setup(
     include_package_data=True,
     entry_points={
         'console_scripts': [
-            'wonderful_bing=wonderful_bing.wonderful_bing:main']
+            'bing=wonderful_bing.wonderful_bing:main']
     }
 )
