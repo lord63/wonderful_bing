@@ -108,7 +108,8 @@ def main():
 A wallpaper a day, keep the doctor away.
 
 Usage:
-  bing [-d DIRECTORY] ENVIRONMENT
+  bing set [-d DIRECTORY] ENVIRONMENT
+  bing story
   bing --version
 
 Arguments:
@@ -121,13 +122,16 @@ Options:
                              [default: /tmp]
 
 """
-    arguments = docopt(doc, version=__version__)
+    arguments = docopt(doc, version=__version__, options_first=True)
     if not path.exists(arguments['--directory']):
         sys.exit('No such directory :(')
 
     bing = WonderfulBing(arguments)
     try:
-        bing.download_and_set()
+        if arguments['story']:
+            print bing.copyright
+        else:
+            bing.download_and_set()
     except requests.exceptions.ConnectionError:
         print "ConnectionError,check your network please."
         print "Will try again after 5 minutes."
