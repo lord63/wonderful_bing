@@ -1,5 +1,11 @@
 ChangeLog
 
+2015.02.06 v0.6.0
+
+- get the picture story, fix #16
+- change command from wonderful_bing to bing, close #15
+- specify the desktop environt rather than detect it, #18
+
 2014.12.17 v0.5.1
 - Support xfce, thanks @jokeryu
 - Escape special characters in the command, fix #10

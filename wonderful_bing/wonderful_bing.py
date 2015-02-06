@@ -12,17 +12,15 @@
 """
 
 __title__ = "wonderful_bing"
-__version__ = "0.5.1"
+__version__ = "0.6.0"
 __author__ = "lord63"
 __license__ = "MIT"
 __copyright__ = "Copyright 2014 lord63"
 
 import re
 import time
-import os
 import sys
 from os import path
-import argparse
 import subprocess
 
 import requests
