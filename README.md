@@ -5,6 +5,12 @@
 ![Platform][5]
 [![Coverage Status][7]][8]
 
+## Intro
+
+Tired of the wallpaper? Let's make the change. This program is to download
+Bing's picture and set as wallpaper with a notify to let you know the story
+behind the picture.
+
 ## Requirements
 
 * Linux platform(Currently support gnome and xfce)
@@ -19,11 +25,14 @@
 
 ## Usage
 
+Use `bing --help` to get the detailed information.
+
 * Manually
 
-You need to set a directory to save the download pictures, end with '/'.
+You need to set a directory(default `/tmp`)to save the download pictures,
+end with '/', specify your desktop_environment(support gnome, cinnamon, xfce4).
 
-    $ wonderful_bing -d /path/to/save/pictures/
+    $ bing set -d /path/to/save/pictures/ desktop_environment
 
 * Automatically(recommand)
 
@@ -33,7 +42,7 @@ You need to set a directory to save the download pictures, end with '/'.
 
 2. Or use `cron`. Let me give you an example:
 
-        0 8 * * * env DISPLAY=:0 /usr/local/bin/wonderful_bing -d /home/lord63/pictures/bing/
+        0 8 * * * env DISPLAY=:0 /usr/local/bin/bing set -d /home/lord63/pictures/bing/ cinnamon
 
    *we need `env DISPLAY=:0`, otherwise the notify can't display at all, and remember
    the `/` at the end.*
@@ -43,7 +52,7 @@ You need to set a directory to save the download pictures, end with '/'.
    picture to wallpaper. Follow [this][6] to let you run `anacron` as normal user. 
    Let me give you an example, add the following line in `$HOME/.anacron/anacrontab`:
 
-        1 1 wonderful_bing env DISPLAY=:0 /usr/local/bin/wonderful_bing -d /home/lord63/pictures/bing/
+        1 1 bing env DISPLAY=:0 /usr/local/bin/bing set -d /home/lord63/pictures/bing/ cinnamon
 
 If you find a better way, please let me know :)
 
@@ -51,26 +60,24 @@ If you find a better way, please let me know :)
 
 the first time you run it:
 
-    $ wonderful_bing -d /home/lord63/pictures/bing/
+    $ bing set -d /home/lord63/pictures/bing/ cinnamon
     Successfully download the picture to --> /home/lord63/pictures/bing/CascadePools.jpg
     Successfully set the picture as the wallpaper. :)
 
-if you don't set the directory:
+get today's picture story.
 
-    $ wonderful_bing
-    Set the directory to save Bing's imgs first.
-    For more information, use --help.
-
+    $ bing story
+    美国蒙大拿州的白鱼市，正在吃花楸浆果的太平鸟 (© Chuck Haney/Alamy)
 
 if the picture has been downloaded before:
 
-    $ wonderful_bing -d /home/lord63/pictures/bing/
+    $ bing set -d /home/lord63/pictures/bing/ cinnamon
     You have downloaded the picture before.
     Have a look at it --> /home/lord63/pictures/bing/CascadePools.jpg
 
 if your pc doesn't connect to the network, it will try again after 5 mins.
 
-    $ wonderful_bing -d /home/lord63/pictures/bing/
+    $ bing set -d /home/lord63/pictures/bing/ cinnamon
     ConnectionError,check your network please.
     Will try again after 5 minutes.
 
