@@ -16,6 +16,7 @@ behind the picture.
 * Linux platform(Currently support gnome and xfce)
 * Python 2.7
 * Requests lib
+* Docopt lib
 * Libnotify-bin(for Arch: libnotify)
 
 ## Install
