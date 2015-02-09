@@ -12,7 +12,6 @@
 """
 
 __title__ = "wonderful_bing"
-__version__ = "0.6.1"
 __author__ = "lord63"
 __license__ = "MIT"
 __copyright__ = "Copyright 2014 lord63"
@@ -25,6 +24,8 @@ import subprocess
 
 import requests
 from docopt import docopt
+
+from version import __version__
 
 
 class WonderfulBing(object):

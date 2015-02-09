@@ -1,5 +1,13 @@
 ChangeLog
 
+2015.02.09 v0.6.2
+
+- fix the error when install it
+
+2015.02.09 v0.6.1
+
+- fix the problem in dependency =_=
+
 2015.02.06 v0.6.0
 
 - get the picture story, fix #16
