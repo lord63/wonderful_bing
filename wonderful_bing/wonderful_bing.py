@@ -45,22 +45,21 @@ class WonderfulBing(object):
         if not self.picture_url.startswith('http'):
             self.picture_url = 'http://www.bing.com' + self.picture_url
         self.environment = arguments['ENVIRONMENT']
-        self.directory = path.abspath(arguments['--directory']) + '/'
+        self.directory = path.abspath(arguments['--directory'])
 
     def show_notify(self):
         """show the notify to get to know the picture story"""
         title = "Today's Picture Story"
-        story_content = re.match(
-            ".+(?=\(\xa9)", self.copyright).group()
-        notify_icon = path.dirname(path.realpath(__file__)) + '/img/icon.png'
+        story_content = re.match(".+(?=\(\xa9)", self.copyright).group()
+        notify_icon = path.join(path.dirname(path.realpath(__file__)),
+                                'img/icon.png')
         safe_story_content = story_content.replace('"', '\"')
         subprocess.Popen(["notify-send", "-a", "wonderful_bing", "-i",
                           notify_icon, title, safe_story_content])
 
     def get_picture_name(self):
         """get a nice picture name from the download url"""
-        match = re.search(
-            "(?<=/az/hprichbg/rb/).+?(?=_)", self.picture_url)
+        match = re.search("(?<=/az/hprichbg/rb/).+?(?=_)", self.picture_url)
         picture_name = match.group() + '.jpg'
         return picture_name
 
@@ -78,9 +77,10 @@ class WonderfulBing(object):
                     picture_path), shell=True)
         else:
             sys.exit(
-                "Currently we don't support your desktop_environment.\n"
-                "Please file an issue or make a pull request :) \n"
-                "https://github.com/lord63/wonderful_bing")
+                ("Currently we don't support your desktop_environment: {0}\n"
+                 "Please file an issue or make a pull request :) \n"
+                 "https://github.com/lord63/wonderful_bing").format(
+                     self.environment))
         if status.wait() == 0:
             print("Successfully set the picture as the wallpaper. :)")
         else:
@@ -88,7 +88,7 @@ class WonderfulBing(object):
 
     def download_and_set(self):
         picture_name = self.get_picture_name()
-        picture_path = self.directory + picture_name
+        picture_path = path.join(self.directory, picture_name)
         if path.exists(picture_path):
             print("You have downloaded the picture before.")
             print("Have a look at it --> {0}".format(picture_path))
