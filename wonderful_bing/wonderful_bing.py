@@ -82,16 +82,16 @@ class WonderfulBing(object):
                 "Please file an issue or make a pull request :) \n"
                 "https://github.com/lord63/wonderful_bing")
         if status.wait() == 0:
-            print "Successfully set the picture as the wallpaper. :)"
+            print("Successfully set the picture as the wallpaper. :)")
         else:
-            print "Something bad happened, fail to set as wallpaper :("
+            print("Something bad happened, fail to set as wallpaper :(")
 
     def download_and_set(self):
         picture_name = self.get_picture_name()
         picture_path = self.directory + picture_name
         if path.exists(picture_path):
-            print "You have downloaded the picture before."
-            print "Have a look at it --> {0}".format(picture_path)
+            print("You have downloaded the picture before.")
+            print("Have a look at it --> {0}".format(picture_path))
             sys.exit()
         # Sleep for two seconds, otherwise the newly setted wallpaper
         # will be setted back by the system when your system boots up
@@ -102,8 +102,8 @@ class WonderfulBing(object):
         with open(picture_path, "wb") as f:
             for chunk in request.iter_content(1024):
                 f.write(chunk)
-        print "Successfully download the picture to --> {0}.".format(
-            picture_path)
+        print("Successfully download the picture to --> {0}.".format(
+            picture_path))
         self.set_wallpaper(picture_path)
         self.show_notify()
 
@@ -116,12 +116,12 @@ def main():
     bing = WonderfulBing(arguments)
     try:
         if arguments['story']:
-            print bing.copyright
+            print(bing.copyright)
         else:
             bing.download_and_set()
     except requests.exceptions.ConnectionError:
-        print "ConnectionError,check your network please."
-        print "Will try again after 5 minutes."
+        print("ConnectionError,check your network please.")
+        print("Will try again after 5 minutes.")
         time.sleep(300)
         bing.download_and_set()
 
