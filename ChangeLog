@@ -1,15 +1,15 @@
 ChangeLog
 
-2015.02.09 v0.6.2
+2015.04.23 v0.7.0
+- support python 3.x, fix #6
 
+2015.02.09 v0.6.2
 - fix the error when install it
 
 2015.02.09 v0.6.1
-
 - fix the problem in dependency =_=
 
 2015.02.06 v0.6.0
-
 - get the picture story, fix #16
 - change command from wonderful_bing to bing, close #15
 - specify the desktop environt rather than detect it, #18
