@@ -1,20 +1,26 @@
 #!/usr/bin/env python
 # -*- coding: utf-8 -*-
+
 """
-    wonderful_bing
-    ~~~~~~~~~~~~~~
+A wallpaper a day, keep the doctor away.
 
-    Wonderful_bing is a small and simple program that helps you download
-    pictures from Bing and set as wallpaper. My first python program :)
+Usage:
+  bing set [-d DIRECTORY] ENVIRONMENT
+  bing story
+  bing -V | --version
+  bing -h | --help
 
-    :copyright: (c) 2014 by lord63.
-    :license: MIT, see LICENSE for more details.
+Arguments:
+  ENVIRONMENT                your desktop environment
+
+Options:
+  -h, --help                 show the help info and exit
+  -V, --version              show the version and exit
+  -d, --directory=DIRECTORY  specify where to save the download picture
+                             [default: /tmp]
 """
 
-__title__ = "wonderful_bing"
-__author__ = "lord63"
-__license__ = "MIT"
-__copyright__ = "Copyright 2014 lord63"
+from __future__ import absolute_import, unicode_literals
 
 import re
 import time
@@ -25,7 +31,7 @@ import subprocess
 import requests
 from docopt import docopt
 
-from version import __version__
+from wonderful_bing import __version__
 
 
 class WonderfulBing(object):
@@ -45,7 +51,7 @@ class WonderfulBing(object):
         """show the notify to get to know the picture story"""
         title = "Today's Picture Story"
         story_content = re.match(
-            ".+(?=\(\xa9)", self.copyright).group().encode('utf-8')
+            ".+(?=\(\xa9)", self.copyright).group()
         notify_icon = path.dirname(path.realpath(__file__)) + '/img/icon.png'
         safe_story_content = story_content.replace('"', '\"')
         subprocess.Popen(["notify-send", "-a", "wonderful_bing", "-i",
@@ -103,26 +109,7 @@ class WonderfulBing(object):
 
 
 def main():
-    doc = """
-A wallpaper a day, keep the doctor away.
-
-Usage:
-  bing set [-d DIRECTORY] ENVIRONMENT
-  bing story
-  bing -V | --version
-  bing -h | --help
-
-Arguments:
-  ENVIRONMENT                your desktop environment
-
-Options:
-  -h, --help                 show the help info and exit
-  -V, --version              show the version and exit
-  -d, --directory=DIRECTORY  specify where to save the download picture
-                             [default: /tmp]
-
-"""
-    arguments = docopt(doc, version=__version__)
+    arguments = docopt(__doc__, version=__version__)
     if not path.exists(arguments['--directory']):
         sys.exit('No such directory :(')
 

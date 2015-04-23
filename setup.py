@@ -3,7 +3,7 @@
 
 from setuptools import setup
 
-from wonderful_bing import version
+from wonderful_bing import __version__
 
 try:
     import pypandoc
@@ -14,7 +14,7 @@ except (IOError, ImportError):
 
 setup(
     name='wonderful_bing',
-    version=version.__version__,
+    version=__version__,
     description="A script download Bing's img and set as wallpaper",
     long_description=long_description,
     url='https://github.com/lord63/wonderful_bing',
@@ -28,10 +28,13 @@ setup(
         'License :: OSI Approved :: MIT License',
         'Programming Language :: Python :: 2',
         'Programming Language :: Python :: 2.7',
+        'Programming Language :: Python :: 3',
+        'Programming Language :: Python :: 3.3',
+        'Programming Language :: Python :: 3.4',
     ],
     keywords='bing wallpaper',
     packages=['wonderful_bing'],
-    install_requires=['docopt==0.6.2', 'requests==2.4.0'],
+    install_requires=['docopt>=0.6.2', 'requests>=2.4.0'],
     include_package_data=True,
     entry_points={
         'console_scripts': [
