@@ -70,6 +70,11 @@ class WonderfulBing(object):
                 "DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set \
                 org.gnome.desktop.background picture-uri file://{0}".format(
                     picture_path), shell=True)
+        elif self.environment in ['mate']:
+            status = subprocess.Popen(
+                "DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set \
+                org.mate.background picture-filename '{0}'".format(
+                    picture_path), shell=True)
         elif self.environment == 'xfce4':
             status = subprocess.Popen(
                 "DISPLAY=:0 xfconf-query -c xfce4-desktop -p \
