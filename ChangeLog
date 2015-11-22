@@ -1,5 +1,9 @@
 ChangeLog
 
+2015.11.22 v0.8.0
+- support mate, thanks to @renzhn
+- wheel support
+
 2015.04.23 v0.7.0
 - support python 3.x, fix #6
 

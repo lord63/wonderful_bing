@@ -13,7 +13,7 @@
 """
 
 __title__ = "wonderful_bing"
-__version__ = '0.7.0'
+__version__ = '0.8.0'
 __author__ = "lord63"
 __license__ = "MIT"
 __copyright__ = "Copyright 2014 lord63"

@@ -5,6 +5,11 @@
 ![Platform][5]
 [![Coverage Status][7]][8]
 
+          __        __   ___  __   ___               __          __
+    |  | /  \ |\ | |  \ |__  |__) |__  |  | |       |__) | |\ | / _`
+    |/\| \__/ | \| |__/ |___ |  \ |    \__/ |___    |__) | | \| \__>
+
+
 ## Intro
 
 Tired of the wallpaper? Let's make the change. This program is to download
@@ -13,15 +18,13 @@ behind the picture.
 
 ## Requirements
 
-* Linux platform(Currently support gnome and xfce)
+* Linux platform(Currently support gnome, xfce(thanks to [@jokeryu][]), mate(thanks to [@renzhn][]))
 * Python 2.7 && python 3.x
-* Requests lib
-* Docopt lib
 * Libnotify-bin(for Arch: libnotify)
 
 ## Install
 
-    $ sudo pip install wonderful_bing
+    $ (sudo) pip install wonderful_bing
     $ sudo apt-get install libnotify-bin
 
 ## Usage
@@ -99,3 +102,5 @@ MIT License
 [6]: http://www.wellengang.ch/?p=135
 [7]: https://img.shields.io/coveralls/lord63/wonderful_bing.svg
 [8]: https://coveralls.io/r/lord63/wonderful_bing
+[@jokeryu]: https://github.com/jokeryu
+[@renzhn]: https://github.com/renzhn
