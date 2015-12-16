@@ -44,8 +44,7 @@ class Bing(object):
 
     @property
     def picture_story(self):
-        copyright = self.response['images'][0]['copyright']
-        story_content = re.match(".+(?=\(\xa9)", copyright).group()
+        story_content = self.response['images'][0]['copyright']
         return story_content
 
     @property
