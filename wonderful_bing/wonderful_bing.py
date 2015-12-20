@@ -155,8 +155,8 @@ def main():
     if not path.exists(arguments['--directory']):
         sys.exit('No such directory :(')
 
-    wonderful_bing = WonderfulBing(arguments)
     try:
+        wonderful_bing = WonderfulBing(arguments)
         if arguments['story']:
             print(wonderful_bing.bing.picture_story)
         else:
