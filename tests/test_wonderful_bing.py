@@ -12,6 +12,7 @@ import pytest
 from wonderful_bing.wonderful_bing import WonderfulBing
 
 
+@pytest.mark.usefixtures('mock_request')
 def test_picture_has_be_downloaded():
     with mock.patch('os.path.exists', return_value=True):
         with pytest.raises(SystemExit):
@@ -20,6 +21,7 @@ def test_picture_has_be_downloaded():
             wonderful_bing.download_picture()
 
 
+@pytest.mark.usefixtures('mock_request')
 def test_download_picture():
     arguments = {'--directory': '/tmp', 'ENVIRONMENT': 'gnome'}
     wonderful_bing = WonderfulBing(arguments)
