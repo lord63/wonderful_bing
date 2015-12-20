@@ -35,9 +35,12 @@ def test_computer(computer):
     assert computer._get_command('blablabla') is None
 
 
-def test_set_wallpaper(computer):
+def test_set_wallpaper_with_unsupported_environment(computer):
     with pytest.raises(SystemExit):
         computer.set_wallpaper('blablabla', 'tmp/blabla.jpg')
+
+
+def test_set_wallpaper(computer):
     with mock.patch('wonderful_bing.wonderful_bing.subprocess') as subprocess:
         computer.set_wallpaper('gnome', '/tmp/blabla.jpg')
         command = computer._get_command('gnome').format('/tmp/blabla.jpg')
