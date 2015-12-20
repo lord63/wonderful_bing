@@ -6,6 +6,7 @@ python:
     - "3.4"
 
 before_install:
+    - pip install codecov
     - pip install -r requirements.txt
     - pip install -e .
 
@@ -13,7 +14,7 @@ script:
     - make test
 
 after_success:
-    - coveralls
+    - codecov
 
 notifications:
     email: false
