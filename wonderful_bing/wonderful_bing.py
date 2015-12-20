@@ -11,8 +11,8 @@ Usage:
   bing -h | --help
 
 Arguments:
-  ENVIRONMENT                your desktop environment
-                             [gnome, gnome2, cinnamon, xfce4, mate]
+  ENVIRONMENT                your desktop environment. Currently we support
+                             gnome, gnome2, cinnamon, xfce4, mate.
 
 Options:
   -h, --help                 show the help info and exit
@@ -85,7 +85,7 @@ class Computer(object):
             return [item[0] for item in self.command_table.items()
                     if environment in item[1]][0]
 
-    def set_wallpaper(self, environment, picture_path):  # pragma: no cover
+    def set_wallpaper(self, environment, picture_path):
         """Set the given picture as wallpaper.
 
         :param environment: the desktop environment.
@@ -102,7 +102,7 @@ class Computer(object):
         status.wait()
         if status.returncode == 0:
             print("Successfully set the picture as the wallpaper. :)")
-        else:
+        else:  # pragma: no cover
             print("Something bad happened, fail to set as wallpaper :(")
 
     def show_notify(self, content):
@@ -168,5 +168,5 @@ def main():
         wonderful_bing.rock()
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     main()
