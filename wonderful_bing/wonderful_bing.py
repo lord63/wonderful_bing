@@ -99,7 +99,8 @@ class Computer(object):
                  "https://github.com/lord63/wonderful_bing").format(
                      environment))
         status = subprocess.Popen(command.format(picture_path), shell=True)
-        if status.wait() == 0:
+        status.wait()
+        if status.returncode == 0:
             print("Successfully set the picture as the wallpaper. :)")
         else:
             print("Something bad happened, fail to set as wallpaper :(")

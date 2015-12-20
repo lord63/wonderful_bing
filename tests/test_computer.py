@@ -42,6 +42,7 @@ def test_set_wallpaper_with_unsupported_environment(computer):
 
 def test_set_wallpaper(computer):
     with mock.patch('wonderful_bing.wonderful_bing.subprocess') as subprocess:
+        subprocess.Popen.return_value.returncode = 0
         computer.set_wallpaper('gnome', '/tmp/blabla.jpg')
         command = computer._get_command('gnome').format('/tmp/blabla.jpg')
         subprocess.Popen.assert_called_once_with(command, shell=True)
