@@ -21,7 +21,7 @@ Options:
                              [default: /tmp]
 """
 
-from __future__ import absolute_import, unicode_literals
+from __future__ import absolute_import, unicode_literals, print_function
 
 import re
 import time
@@ -56,7 +56,6 @@ class Bing(object):
 
     @property
     def picture_name(self):
-        """get a nice picture name from the download url"""
         match = re.search("(?<=/az/hprichbg/rb/).+?(?=_)", self.picture_url)
         picture_name = match.group() + '.jpg'
         return picture_name
@@ -77,12 +76,21 @@ class Computer(object):
         }
 
     def _get_command(self, environment):
+        """Get the command for setting the wallpaper according to the
+        desktop environtment, return None if we don't support it yet.
+
+        :param environment: the desktop environment.
+        """
         if environment in sum(self.command_table.values(), []):
             return [item[0] for item in self.command_table.items()
                     if environment in item[1]][0]
 
     def set_wallpaper(self, environment, picture_path):  # pragma: no cover
-        # We use this command to make it work when using cron, see #3
+        """Set the given picture as wallpaper.
+
+        :param environment: the desktop environment.
+        :param picture_path: the absolute picture location.
+        """
         command = self._get_command(environment)
         if not command:
             sys.exit(
@@ -97,7 +105,10 @@ class Computer(object):
             print("Something bad happened, fail to set as wallpaper :(")
 
     def show_notify(self, content):
-        """show the notify to get to know the picture story"""
+        """Show the notify to get to know the picture story.
+
+        :param content: the picture story.
+        """
         title = "Today's Picture Story"
         notify_icon = path.join(path.dirname(path.realpath(__file__)),
                                 'img/icon.png')
