@@ -11,7 +11,8 @@ Usage:
   bing -h | --help
 
 Arguments:
-  ENVIRONMENT                your desktop environment
+  ENVIRONMENT                your desktop environment. Currently we support
+                             gnome, gnome2, cinnamon, xfce4, mate.
 
 Options:
   -h, --help                 show the help info and exit
@@ -20,7 +21,7 @@ Options:
                              [default: /tmp]
 """
 
-from __future__ import absolute_import, unicode_literals
+from __future__ import absolute_import, unicode_literals, print_function
 
 import re
 import time
@@ -34,83 +35,119 @@ from docopt import docopt
 from wonderful_bing import __version__
 
 
-class WonderfulBing(object):
-    def __init__(self, arguments):
+class Bing(object):
+    def __init__(self):
         # Get all the information we need from this url, see issue#7
-        self.url = "http://www.bing.com/HPImageArchive.aspx?format=js&idx=0&n=\
-                   1&nc=1409879295618&pid=hp"
-        information = requests.get(self.url).json()["images"][0]
-        self.copyright = information["copyright"]
-        self.picture_url = information["url"]
-        if not self.picture_url.startswith('http'):
-            self.picture_url = 'http://www.bing.com' + self.picture_url
-        self.environment = arguments['ENVIRONMENT']
-        self.directory = path.abspath(arguments['--directory'])
+        self.url = ("https://www.bing.com/HPImageArchive.aspx?format=js"
+                    "&idx=0&n=1&nc=1409879295618&pid=hp")
+        self.response = requests.get(self.url).json()
 
-    def show_notify(self):
-        """show the notify to get to know the picture story"""
-        title = "Today's Picture Story"
-        story_content = re.match(".+(?=\(\xa9)", self.copyright).group()
-        notify_icon = path.join(path.dirname(path.realpath(__file__)),
-                                'img/icon.png')
-        safe_story_content = story_content.replace('"', '\"')
-        subprocess.Popen(["notify-send", "-a", "wonderful_bing", "-i",
-                          notify_icon, title, safe_story_content])
+    @property
+    def picture_story(self):
+        story_content = self.response['images'][0]['copyright']
+        return story_content
 
-    def get_picture_name(self):
-        """get a nice picture name from the download url"""
+    @property
+    def picture_url(self):
+        picture_url = self.response['images'][0]['url']
+        if not picture_url.startswith('http'):
+            picture_url = 'https://www.bing.com' + picture_url
+        return picture_url
+
+    @property
+    def picture_name(self):
         match = re.search("(?<=/az/hprichbg/rb/).+?(?=_)", self.picture_url)
         picture_name = match.group() + '.jpg'
         return picture_name
 
-    def set_wallpaper(self, picture_path):  # pragma: no cover
+
+class Computer(object):
+    def __init__(self):
         # We use this command to make it work when using cron, see #3
-        if self.environment in ['gnome', 'gnome2', 'cinnamon']:
-            status = subprocess.Popen(
-                "DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set \
-                org.gnome.desktop.background picture-uri file://{0}".format(
-                    picture_path), shell=True)
-        elif self.environment in ['mate']:
-            status = subprocess.Popen(
-                "DISPLAY=:0 GSETTINGS_BACKEND=dconf /usr/bin/gsettings set \
-                org.mate.background picture-filename '{0}'".format(
-                    picture_path), shell=True)
-        elif self.environment == 'xfce4':
-            status = subprocess.Popen(
-                "DISPLAY=:0 xfconf-query -c xfce4-desktop -p \
-                /backdrop/screen0/monitor0/image-path -s {0}".format(
-                    picture_path), shell=True)
-        else:
+        self.command_table = {
+            ("DISPLAY=:0 GSETTINGS_BACKEND=dconf "
+             "/usr/bin/gsettings set org.gnome.desktop.background "
+             "picture-uri file://{0}"): ['gnome', 'gnome2', 'cinnamon'],
+            ("DISPLAY=:0 GSETTINGS_BACKEND=dconf "
+             "/usr/bin/gsettings set org.mate.background "
+             "picture-filename '{0}'"): ['mate'],
+            ("DISPLAY=:0 xfconf-query -c xfce4-desktop "
+             "-p /backdrop/screen0/monitor0/image-path -s {0}"): ['xfce4'],
+        }
+
+    def _get_command(self, environment):
+        """Get the command for setting the wallpaper according to the
+        desktop environtment, return None if we don't support it yet.
+
+        :param environment: the desktop environment.
+        """
+        if environment in sum(self.command_table.values(), []):
+            return [item[0] for item in self.command_table.items()
+                    if environment in item[1]][0]
+
+    def set_wallpaper(self, environment, picture_path):
+        """Set the given picture as wallpaper.
+
+        :param environment: the desktop environment.
+        :param picture_path: the absolute picture location.
+        """
+        command = self._get_command(environment)
+        if not command:
             sys.exit(
                 ("Currently we don't support your desktop_environment: {0}\n"
                  "Please file an issue or make a pull request :) \n"
                  "https://github.com/lord63/wonderful_bing").format(
-                     self.environment))
-        if status.wait() == 0:
+                     environment))
+        status = subprocess.Popen(command.format(picture_path), shell=True)
+        status.wait()
+        if status.returncode == 0:
             print("Successfully set the picture as the wallpaper. :)")
-        else:
+        else:  # pragma: no cover
             print("Something bad happened, fail to set as wallpaper :(")
 
-    def download_and_set(self):
-        picture_name = self.get_picture_name()
-        picture_path = path.join(self.directory, picture_name)
-        if path.exists(picture_path):
+    def show_notify(self, content):
+        """Show the notify to get to know the picture story.
+
+        :param content: the picture story.
+        """
+        title = "Today's Picture Story"
+        notify_icon = path.join(path.dirname(path.realpath(__file__)),
+                                'img/icon.png')
+        safe_content = content.replace('"', '\"')
+        subprocess.Popen(["notify-send", "-a", "wonderful_bing", "-i",
+                          notify_icon, title, safe_content])
+
+
+class WonderfulBing(object):
+    def __init__(self, arguments):
+        self.environment = arguments['ENVIRONMENT']
+        self.directory = path.abspath(arguments['--directory'])
+        self.bing = Bing()
+        self.picture_path = path.join(self.directory, self.bing.picture_name)
+
+    def download_picture(self):
+        if path.exists(self.picture_path):
             print("You have downloaded the picture before.")
-            print("Have a look at it --> {0}".format(picture_path))
+            print("Have a look at it --> {0}".format(self.picture_path))
             sys.exit()
         # Sleep for two seconds, otherwise the newly setted wallpaper
         # will be setted back by the system when your system boots up
         # if you have added this script to autostart.
         time.sleep(2)
         # Set stream to true to get the raw content
-        request = requests.get(self.picture_url, stream=True)
-        with open(picture_path, "wb") as f:
+        request = requests.get(self.bing.picture_url, stream=True)
+        with open(self.picture_path, "wb") as f:
             for chunk in request.iter_content(1024):
                 f.write(chunk)
         print("Successfully download the picture to --> {0}.".format(
-            picture_path))
-        self.set_wallpaper(picture_path)
-        self.show_notify()
+              self.picture_path))
+
+    def rock(self):
+        """Download the picture, set as wallpaper, show the notify."""
+        self.download_picture()
+        computer = Computer()
+        computer.set_wallpaper(self.environment, self.picture_path)
+        computer.show_notify(self.bing.picture_story)
 
 
 def main():
@@ -118,18 +155,18 @@ def main():
     if not path.exists(arguments['--directory']):
         sys.exit('No such directory :(')
 
-    bing = WonderfulBing(arguments)
     try:
+        wonderful_bing = WonderfulBing(arguments)
         if arguments['story']:
-            print(bing.copyright)
+            print(wonderful_bing.bing.picture_story)
         else:
-            bing.download_and_set()
+            wonderful_bing.rock()
     except requests.exceptions.ConnectionError:
         print("ConnectionError,check your network please.")
         print("Will try again after 5 minutes.")
         time.sleep(300)
-        bing.download_and_set()
+        wonderful_bing.rock()
 
 
-if __name__ == '__main__':
+if __name__ == '__main__':  # pragma: no cover
     main()

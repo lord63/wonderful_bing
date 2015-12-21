@@ -1,2 +1,7 @@
 requests
 docopt
+responses
+mock
+pytest
+pytest-pep8
+pytest-cov

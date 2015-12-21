@@ -100,7 +100,7 @@ MIT License
 [4]: https://travis-ci.org/lord63/wonderful_bing
 [5]: http://img.shields.io/badge/Platform-Linux-blue.svg
 [6]: http://www.wellengang.ch/?p=135
-[7]: https://img.shields.io/coveralls/lord63/wonderful_bing.svg
-[8]: https://coveralls.io/r/lord63/wonderful_bing
+[7]: https://codecov.io/github/lord63/wonderful_bing/coverage.svg?branch=master
+[8]: https://codecov.io/github/lord63/wonderful_bing?branch=master
 [@jokeryu]: https://github.com/jokeryu
 [@renzhn]: https://github.com/renzhn
