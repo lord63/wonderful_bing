@@ -71,7 +71,7 @@ the first time you run it:
 get today's picture story.
 
     $ bing story
-    美国蒙大拿州的白鱼市，正在吃花楸浆果的太平鸟 (© Chuck Haney/Alamy)
+    Aurora borealis over the coast of Iceland (© Babak Tafreshi/Nimia)
 
 if the picture has been downloaded before:
 
@@ -87,7 +87,7 @@ if your pc doesn't connect to the network, it will try again after 5 mins.
 
 and the notify should looks like this:
 
-![](./wonderful_bing/img/notify.png)
+![notify-img][]
 
 ## License
 
@@ -104,3 +104,4 @@ MIT License
 [8]: https://codecov.io/github/lord63/wonderful_bing?branch=master
 [@jokeryu]: https://github.com/jokeryu
 [@renzhn]: https://github.com/renzhn
+[notify-img]: https://cloud.githubusercontent.com/assets/5268051/13343827/644a4472-dc8b-11e5-9a61-89c5531dbc2d.jpg
