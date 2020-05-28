@@ -1,47 +1,26 @@
 {
-    "images": [{
-        "startdate": "20151216",
-        "fullstartdate": "201512161600",
-        "enddate": "20151217",
-        "url": "/az/hprichbg/rb/HudsonBayPolars_ZH-CN10500767857_1920x1080.jpg",
-        "urlbase": "/az/hprichbg/rb/HudsonBayPolars_ZH-CN10500767857",
-        "copyright": "加拿大，结冰的哈德逊湾，北极熊妈妈和她的宝宝  (© Kike Calvo/Corbis)",
-        "copyrightlink": "http://www.bing.com/search?q=%E5%8A%A0%E6%8B%BF%E5%A4%A7+%E5%93%88%E5%BE%B7%E9%80%8A%E6%B9%BE&form=hpcapt&mkt=zh-cn",
-        "wp": true,
-        "hsh": "9f5271c0ef2d6f14c3e619f96ed1ad1b",
-        "drk": 1,
-        "top": 1,
-        "bot": 1,
-        "hs": [{
-            "desc": "哈德逊湾曾是覆盖北美大陆北部的主冰架积长中心点，",
-            "link": "http://www.bing.com/images/search?q=%E5%93%88%E5%BE%B7%E9%80%8A%E6%B9%BE&form=hphot1&mkt=zh-cn",
-            "query": "而时至今日，相邻纬度下，哈德逊湾相比其它地区，也要更加寒冷……",
-            "locx": 11,
-            "locy": 41
-        }, {
-            "desc": "而在这些积雪覆盖的区域，有一种动物跟这里浑然一体，",
-            "link": "http://www.bing.com/images/search?q=%E5%8C%97%E6%9E%81%E7%86%8A&FORM=hphot2&mkt=zh-cn",
-            "query": "让你忍不住想抱一下。（必应友情提示：别!）",
-            "locx": 46,
-            "locy": 49
-        }, {
-            "desc": "而这里有另一种动物，处于食物链上层掠食者的它们，",
-            "link": "http://www.bing.com/search?q=%E5%93%88%E5%BE%B7%E9%80%8A%E6%B9%BE%E7%8B%BC&form=hphot3&mkt=zh-cn",
-            "query": "我想你就不那么想拥抱了……",
-            "locx": 60,
-            "locy": 42
-        }],
-        "msg": [{
-            "title": "今日图片故事",
-            "link": "http://www.bing.com/search?q=%E5%8A%A0%E6%8B%BF%E5%A4%A7+%E5%93%88%E5%BE%B7%E9%80%8A%E6%B9%BE&form=pgbar1&mkt=zh-cn",
-            "text": "加拿大 哈德逊湾"
-        }]
-    }],
-    "tooltips": {
-        "loading": "Loading...",
-        "previous": "Previous",
-        "next": "Next",
-        "walle": "This image is not available to download as wallpaper.",
-        "walls": "Download this image. Use of this image is restricted to wallpaper only."
-    }
+	"images": [{
+		"startdate": "20200527",
+		"fullstartdate": "202005271600",
+		"enddate": "20200528",
+		"url": "/th?id=OHR.OldManWhiskers_ZH-CN9321160932_1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp",
+		"urlbase": "/th?id=OHR.OldManWhiskers_ZH-CN9321160932",
+		"copyright": "结籽时的三花锦葵的长羽 (© Sunshine Haven Photo/Shutterstock)",
+		"copyrightlink": "/search?q=%e4%b8%89%e8%8a%b1%e9%94%a6%e8%91%b5&form=hpcapt&mkt=zh-cn",
+		"title": "",
+		"quiz": "/search?q=Bing+homepage+quiz&filters=WQOskey:%22HPQuiz_20200527_OldManWhiskers%22&FORM=HPQUIZ",
+		"wp": true,
+		"hsh": "ff2d060438b1a2b190d523db49725ec8",
+		"drk": 1,
+		"top": 1,
+		"bot": 1,
+		"hs": []
+	}],
+	"tooltips": {
+		"loading": "正在加载...",
+		"previous": "上一个图像",
+		"next": "下一个图像",
+		"walle": "此图片不能下载用作壁纸。",
+		"walls": "下载今日美图。仅限用作桌面壁纸。"
+	}
 }
