@@ -1,5 +1,10 @@
 ChangeLog
 
+2020.05.28 v0.10.0
+- fix url change
+- fix unicode path, #22
+- drop 3.3, 3,4 support, add 3.6+ support
+
 2015.12.21 v0.9.0
 - add python3.5 support
 - refactor the code and tests, #20
