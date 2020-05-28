@@ -28,6 +28,10 @@ import time
 import sys
 from os import path
 import subprocess
+try:
+    from urllib.parse import urlsplit, parse_qs
+except ImportError:
+    from urlparse import urlsplit, parse_qs
 
 import requests
 from docopt import docopt
@@ -56,8 +60,9 @@ class Bing(object):
 
     @property
     def picture_name(self):
-        match = re.search("(?<=/az/hprichbg/rb/).+?(?=_)", self.picture_url)
-        picture_name = match.group() + '.jpg'
+        long_name = parse_qs(urlsplit(self.picture_url).query)["id"][0]
+        _, name, ext = long_name.split(".")
+        picture_name = name.split("_")[0] + "." + ext
         return picture_name
 
 
@@ -122,6 +127,8 @@ class WonderfulBing(object):
     def __init__(self, arguments):
         self.environment = arguments['ENVIRONMENT']
         self.directory = path.abspath(arguments['--directory'])
+        if sys.version_info[0] == 2:
+            self.directory = self.directory.decode('utf-8')
         self.bing = Bing()
         self.picture_path = path.join(self.directory, self.bing.picture_name)
 
