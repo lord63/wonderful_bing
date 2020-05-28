@@ -26,8 +26,8 @@ def mock_request():
     )
     responses.add(
         responses.GET,
-        url=("https://www.bing.com/az/hprichbg/rb/HudsonBayPolars_"
-             "ZH-CN10500767857_1920x1080.jpg"),
+        url=('https://www.bing.com/th?id=OHR.OldManWhiskers_ZH-CN9321160932_'
+             '1920x1080.jpg&rf=LaDigue_1920x1080.jpg&pid=hp'),
         status=200,
         body='Hello, world'
     )
