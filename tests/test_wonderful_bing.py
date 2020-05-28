@@ -23,7 +23,7 @@ def test_picture_has_be_downloaded():
 
 @pytest.mark.usefixtures('mock_request')
 def test_download_picture():
-    arguments = {'--directory': '/tmp', 'ENVIRONMENT': 'gnome'}
+    arguments = {'--directory': '/tmp/Obrázky', 'ENVIRONMENT': 'gnome'}
     wonderful_bing = WonderfulBing(arguments)
     check_picture(wonderful_bing.picture_path)
     with mock.patch('time.sleep', return_value=None):

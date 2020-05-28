@@ -127,6 +127,8 @@ class WonderfulBing(object):
     def __init__(self, arguments):
         self.environment = arguments['ENVIRONMENT']
         self.directory = path.abspath(arguments['--directory'])
+        if sys.version_info[0] == 2:
+            self.directory = self.directory.decode('utf-8')
         self.bing = Bing()
         self.picture_path = path.join(self.directory, self.bing.picture_name)
 
